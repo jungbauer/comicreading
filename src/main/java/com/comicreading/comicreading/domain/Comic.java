@@ -73,5 +73,10 @@ public class Comic {
     public String getActiveLink() {
         return activeLinkPrefix.concat(Integer.toString(currChapter)).concat(activeLinkSuffix);
     }
-    
+
+    @Override
+    public String toString() {
+        return "Comic [id=" + id + ", title=" + title + ", currChapter=" + currChapter + "]";
+    }
+
 }
