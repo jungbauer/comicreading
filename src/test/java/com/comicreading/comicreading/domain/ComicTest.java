@@ -8,10 +8,14 @@ import org.junit.jupiter.api.Test;
 
 public class ComicTest {
     static Comic testComic;
+    static Comic activeComic;
 
     @BeforeAll
     static void setup() {
         testComic = new Comic("title", "main link", 12);
+        activeComic = new Comic("active", "active", 106);
+        activeComic.setActiveLinkPrefix("https://toonily.net/manga/mercenary-enrollment/chapter-");
+        activeComic.setActiveLinkSuffix("/");
     }
 
     @Test
@@ -27,6 +31,22 @@ public class ComicTest {
     @Test
     void testGetTitle() {
         assertTrue(testComic.getTitle() == "title");
+    }
+
+    @Test
+    void testGetActiveLinkPrefix() {
+        assertTrue(activeComic.getActiveLinkPrefix() == "https://toonily.net/manga/mercenary-enrollment/chapter-");
+    }
+
+    @Test
+    void testGetActiveLinkSuffix() {
+        assertTrue(activeComic.getActiveLinkSuffix() == "/");
+    }
+
+    @Test
+    void testGetActiveLink() {
+        System.out.println(activeComic.getActiveLink());
+        assertTrue(activeComic.getActiveLink().equals("https://toonily.net/manga/mercenary-enrollment/chapter-106/"));
     }
 
     @Test
@@ -52,4 +72,14 @@ public class ComicTest {
         assertFalse(test3.getTitle() == "t");
         assertTrue(test3.getTitle() == "new title");
     }
+
+    @Test
+    void testSetActiveLinks() {
+        Comic active1 = new Comic("active", "active", 37);
+        active1.setActiveLinkPrefix("https://beta.asurascans.com/read/114-transmigrating-to-the-otherworld-once-more/chapter-");
+        active1.setActiveLinkSuffix("");
+
+        assertTrue(active1.getActiveLink().equals("https://beta.asurascans.com/read/114-transmigrating-to-the-otherworld-once-more/chapter-37"));
+    }
+    
 }

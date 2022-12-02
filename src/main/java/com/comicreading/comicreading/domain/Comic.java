@@ -14,6 +14,8 @@ public class Comic {
     private String title;
     private String mainLink;
     private int currChapter;
+    private String activeLinkPrefix;
+    private String activeLinkSuffix;
 
     
     public Comic(String title, String mainLink, int currChapter) {
@@ -25,27 +27,49 @@ public class Comic {
     public int getId() {
         return id;
     }
-    public void setId(int id) {
-        this.id = id;
-    }
+
     public String getTitle() {
         return title;
     }
+
     public void setTitle(String title) {
         this.title = title;
     }
+
     public String getMainLink() {
         return mainLink;
     }
+
     public void setMainLink(String mainLink) {
         this.mainLink = mainLink;
     }
+
     public int getCurrChapter() {
         return currChapter;
     }
+
     public void setCurrChapter(int currChapter) {
         this.currChapter = currChapter;
     }
 
+    public String getActiveLinkPrefix() {
+        return activeLinkPrefix;
+    }
+
+    public void setActiveLinkPrefix(String activeLinkPrefix) {
+        this.activeLinkPrefix = activeLinkPrefix;
+    }
+
+    public String getActiveLinkSuffix() {
+        return activeLinkSuffix;
+    }
+
+    public void setActiveLinkSuffix(String activeLinkSuffix) {
+        this.activeLinkSuffix = activeLinkSuffix;
+    }
+
+    public String getActiveLink() {
+        return activeLinkPrefix.concat(Integer.toString(currChapter)).concat(activeLinkSuffix);
+    }
     
 }
