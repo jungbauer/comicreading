@@ -26,4 +26,14 @@ public class ComicController {
         model.addAttribute("comics", list);
         return "comic/comicList";
     }
+
+    // @GetMapping("/comicinit")
+    // public String comicInit(Model model) {
+
+    //     comicRepository.save(new Comic("The Beginning After the End", "https://toonily.net/manga/the-beginning-after-the-end/", "171"));
+	// 	comicRepository.save(new Comic("Mercenary Enrollment", "https://toonily.net/manga/mercenary-enrollment/", "113"));
+	// 	comicRepository.save(new Comic("The Beginning After the End", "https://toonily.net/manga/reaper-of-the-drifting-moon/", "41"));
+
+    //     return "comic/comicInit";
+    // }
 }
