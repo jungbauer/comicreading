@@ -16,7 +16,7 @@ public class ComicRepositoryTest {
 
     @Test
     public void createNewComic() {
-        Comic newComic = new Comic("comic_title", "http://test.com", 7);
+        Comic newComic = new Comic("comic_title", "http://test.com", "7");
         comicRepository.save(newComic);
 
         Comic byTitle = comicRepository.findOneByTitle("comic_title");
