@@ -19,6 +19,7 @@ public class Comic {
     private String activeLinkPrefix;
     private String activeLinkSuffix;
 
+    public Comic() {}
     
     public Comic(String title, String mainLink, String currChapter) {
         this.title = title;
