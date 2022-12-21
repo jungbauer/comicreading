@@ -31,6 +31,7 @@
                                     <th>currChap</th>
                                     <th>linkPrefix</th>
                                     <th>linkSuffix</th>
+                                    <th>active link</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,6 +42,7 @@
                                     <td th:text="${comic.currChapter}"></td>
                                     <td th:text="${comic.activeLinkPrefix}"></td>
                                     <td th:text="${comic.activeLinkSuffix}"></td>
+                                    <td th:text="${comic.getActiveLink()}"></td>
                                 </tr>
                             </tbody>
                         </table>
