@@ -2,6 +2,7 @@ package com.comicreading.comicreading.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,13 @@ public class ComicService {
     public Comic saveComic(Comic comic) {
         //TODO there is a lot of error handling that is just not happening here.
         return comicRepository.save(comic);
+    }
+
+    public Comic findComicById(Integer id) throws Exception{
+        if(id == null) throw new Exception("Id should not be null");
+        Optional<Comic> optComic = comicRepository.findById(id);
+        if(optComic.isPresent()) return optComic.get();
+        else throw new Exception("Comic not found");
     }
 
     public void addInitialTestComics() {

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.comicreading.comicreading.domain.Comic;
 import com.comicreading.comicreading.service.ComicService;
@@ -36,6 +37,19 @@ public class ComicController {
         Comic savedComic = comicService.saveComic(comic);
         model.addAttribute("comic", savedComic);
         return "comic/comicResult";
+    }
+
+    @GetMapping("/editComic")
+    public String editComic(@RequestParam(name = "id") String comicId, Model model) {
+        try {
+            Comic editComic = comicService.findComicById(Integer.parseInt(comicId));
+            model.addAttribute("comic", editComic);
+            return "comic/comicForm";
+        } catch (Exception e) {
+            // TODO: handle exception
+            return "error";
+        }
+        
     }
 
 }
