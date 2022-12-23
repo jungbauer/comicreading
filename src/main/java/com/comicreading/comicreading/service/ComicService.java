@@ -37,6 +37,13 @@ public class ComicService {
         else throw new Exception("Comic not found");
     }
 
+    public void deleteComic(Integer id) throws Exception{
+        if(id == null) throw new Exception("Id should not be null");
+        Optional<Comic> optComic = comicRepository.findById(id);
+        if(optComic.isPresent()) comicRepository.delete(optComic.get());
+        else throw new Exception("Comic not found");
+    }
+
     public void addInitialTestComics() {
         comicRepository.save(new Comic("The Beginning After the End", "https://toonily.net/manga/the-beginning-after-the-end/", "171"));
 		comicRepository.save(new Comic("Mercenary Enrollment", "https://toonily.net/manga/mercenary-enrollment/", "113"));

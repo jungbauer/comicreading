@@ -67,4 +67,16 @@ public class ComicController {
         
     }
 
+    @GetMapping("/deleteComic")
+    public ModelAndView deleteComic(@RequestParam(name = "id") String comicId, Model model) {
+        //TODO this really needs a confirmation modal etc
+        try {
+            comicService.deleteComic(Integer.parseInt(comicId));
+            return new ModelAndView("redirect:comics");
+        } catch (Exception e) {
+            // TODO: handle exception
+            return new ModelAndView("error");
+        }
+        
+    }
 }
