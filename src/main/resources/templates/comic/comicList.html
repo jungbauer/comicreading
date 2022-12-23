@@ -32,6 +32,7 @@
                                     <th>linkPrefix</th>
                                     <th>linkSuffix</th>
                                     <th>active link</th>
+                                    <th>edit</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -43,6 +44,7 @@
                                     <td th:text="${comic.activeLinkPrefix}"></td>
                                     <td th:text="${comic.activeLinkSuffix}"></td>
                                     <td th:text="${comic.getActiveLink()}"></td>
+                                    <td><a th:href="@{/editComic(id=${comic.id})}">edit</a></td>
                                 </tr>
                             </tbody>
                         </table>
