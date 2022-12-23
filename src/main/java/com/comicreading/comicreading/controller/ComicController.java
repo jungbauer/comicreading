@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.comicreading.comicreading.domain.Comic;
 import com.comicreading.comicreading.service.ComicService;
@@ -53,16 +54,15 @@ public class ComicController {
     }
 
     @GetMapping("/incComic")
-    public String incComic(@RequestParam(name = "id") String comicId, Model model) {
+    public ModelAndView incComic(@RequestParam(name = "id") String comicId, Model model) {
         try {
             Comic editComic = comicService.findComicById(Integer.parseInt(comicId));
             editComic.incrementChapter();
             comicService.saveComic(editComic);
-            model.addAttribute("comics", comicService.getAllComics());
-            return "comic/comicListDetailed";
+            return new ModelAndView("redirect:comics");
         } catch (Exception e) {
             // TODO: handle exception
-            return "error";
+            return new ModelAndView("error");
         }
         
     }
