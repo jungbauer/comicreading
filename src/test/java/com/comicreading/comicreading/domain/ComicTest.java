@@ -81,5 +81,13 @@ public class ComicTest {
 
         assertTrue(active1.getActiveLink().equals("https://beta.asurascans.com/read/114-transmigrating-to-the-otherworld-once-more/chapter-37"));
     }
+
+    @Test
+    void testIncrementChapter() {
+        Comic comic = new Comic("active", "active", "37");
+        comic.incrementChapter();
+
+        assertTrue(comic.getCurrChapter().equals("38"));
+    }
     
 }

@@ -52,4 +52,19 @@ public class ComicController {
         
     }
 
+    @GetMapping("/incComic")
+    public String incComic(@RequestParam(name = "id") String comicId, Model model) {
+        try {
+            Comic editComic = comicService.findComicById(Integer.parseInt(comicId));
+            editComic.incrementChapter();
+            comicService.saveComic(editComic);
+            model.addAttribute("comics", comicService.getAllComics());
+            return "comic/comicList";
+        } catch (Exception e) {
+            // TODO: handle exception
+            return "error";
+        }
+        
+    }
+
 }

@@ -76,6 +76,11 @@ public class Comic {
         return activeLinkPrefix.concat(currChapter).concat(activeLinkSuffix);
     }
 
+    public void incrementChapter() {
+        Integer newCh = Integer.parseInt(currChapter) + 1;
+        currChapter = Integer.toString(newCh);
+    }
+
     @Override
     public String toString() {
         return "Comic [id=" + id + ", title=" + title + ", currChapter=" + currChapter + "]";

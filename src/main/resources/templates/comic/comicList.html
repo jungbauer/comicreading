@@ -33,6 +33,7 @@
                                     <th>linkSuffix</th>
                                     <th>active link</th>
                                     <th>edit</th>
+                                    <th>increment</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -45,6 +46,7 @@
                                     <td th:text="${comic.activeLinkSuffix}"></td>
                                     <td th:text="${comic.getActiveLink()}"></td>
                                     <td><a th:href="@{/editComic(id=${comic.id})}">edit</a></td>
+                                    <td><a th:href="@{/incComic(id=${comic.id})}">increment</a></td>
                                 </tr>
                             </tbody>
                         </table>
