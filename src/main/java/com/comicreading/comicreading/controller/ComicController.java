@@ -20,10 +20,10 @@ public class ComicController {
     private ComicService comicService;
 
     @GetMapping("/comics")
-    public String comicList(Model model) {
+    public String comicListDetailed(Model model) {
         List<Comic> list = comicService.getAllComics();
         model.addAttribute("comics", list);
-        return "comic/comicList";
+        return "comic/comicListDetailed";
     }
 
     @GetMapping("/addComic")
@@ -59,7 +59,7 @@ public class ComicController {
             editComic.incrementChapter();
             comicService.saveComic(editComic);
             model.addAttribute("comics", comicService.getAllComics());
-            return "comic/comicList";
+            return "comic/comicListDetailed";
         } catch (Exception e) {
             // TODO: handle exception
             return "error";

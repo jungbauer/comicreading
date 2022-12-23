@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 <head> 
-    <title>List of comics in DB</title> 
+    <title>Detailed List of comics</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <style type="text/css">
@@ -44,7 +44,7 @@
                                     <td th:text="${comic.currChapter}"></td>
                                     <td th:text="${comic.activeLinkPrefix}"></td>
                                     <td th:text="${comic.activeLinkSuffix}"></td>
-                                    <td th:text="${comic.getActiveLink()}"></td>
+                                    <td><a target="_blank" th:href="${comic.getActiveLink()}" th:text="${comic.getActiveLink()}"></a></td>
                                     <td><a th:href="@{/editComic(id=${comic.id})}">edit</a></td>
                                     <td><a th:href="@{/incComic(id=${comic.id})}">increment</a></td>
                                 </tr>
