@@ -20,6 +20,6 @@ public class IndexController {
     public String homePage(Model model) {
         List<Comic> list = comicService.getAllComics();
         model.addAttribute("comics", list);
-        return "comic/comicListDetailed";
+        return "comic/comicListMain";
     }
 }

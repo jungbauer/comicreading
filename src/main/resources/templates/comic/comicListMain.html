@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head> 
+    <title>List of comics</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <style type="text/css">
+        .tg  {border-collapse:collapse;border-color:#9ABAD9;border-spacing:0;}
+        .tg td{border-color:#9ABAD9;border-style:solid;border-width:1px;color:#444;
+          font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
+        .tg th{background-color:#409cff;border-color:#9ABAD9;border-style:solid;border-width:1px;color:#fff;
+          font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+        .tg tr:nth-child(even) {background-color:#D2E4FC;}
+        </style>
+</head>
+<body>
+    <div layout:fragment="content">
+        <section class="my-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Comics</h1>
+                        <table class="tg"
+                            <thead>
+                                <tr>
+                                    <th>comic</th>
+                                    <th>increment</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="comic: ${comics}">
+                                    <td><a target="_blank" th:href="${comic.getActiveLink()}" th:text="${comic.title} + ' (' + ${comic.currChapter} + ')'"></a></td>
+                                    <td><a th:href="@{/incComic(id=${comic.id})}">increment</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
