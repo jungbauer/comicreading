@@ -31,6 +31,10 @@ public class Comic {
         return id;
     }
 
+    public void setId(int newId) {
+        this.id = newId;
+    }
+
     public String getTitle() {
         return title;
     }

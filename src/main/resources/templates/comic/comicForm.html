@@ -13,6 +13,7 @@
                 <h1>Add Comic</h1>
                 </div>
                 <form action="#" th:action="@{/saveComic}" th:object="${comic}" method="post">
+                    <p><input type="hidden" th:field="*{id}" /></p>
                     <p>Title: <input type="text" th:field="*{title}" /></p>
                     <p>main link: <input type="text" th:field="*{mainLink}" /></p>
                     <p>current chapter: <input type="text" th:field="*{currChapter}" /></p>
