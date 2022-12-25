@@ -13,7 +13,11 @@
         .tg th{background-color:#409cff;border-color:#9ABAD9;border-style:solid;border-width:1px;color:#fff;
           font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
         .tg tr:nth-child(even) {background-color:#D2E4FC;}
-        </style>
+
+        .inc-btn {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <div layout:fragment="content">
@@ -32,7 +36,7 @@
                             <tbody>
                                 <tr th:each="comic: ${comics}">
                                     <td><a target="_blank" th:href="${comic.getActiveLink()}" th:text="${comic.title} + ' (' + ${comic.currChapter} + ')'"></a></td>
-                                    <td><a th:href="@{/incComic(id=${comic.id})}">increment</a></td>
+                                    <td class="inc-btn"><a class="btn btn-secondary" th:href="@{/incComic(id=${comic.id})}">+1</a></td>
                                 </tr>
                             </tbody>
                         </table>
