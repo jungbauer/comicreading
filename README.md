@@ -15,7 +15,9 @@ sudo -u postgres createdb comicdb -O comicadmin
 ```
 
 ## Initial data settings
-The dev database is initialised from the `schema.sql` and `data.sql` files. When using the default profile the initialisation is triggered at startup. See `spring.sql.init.mode` setting in the `application.properties` file. Running with the dev profile doesn't trigger the initialisation. There is a Gradle task for this: `bootRunDev`. [Reference link](https://www.baeldung.com/spring-boot-data-sql-and-schema-sql)
+The database, using the default profile, is initialised via JPA/Hibernate and `import.sql` is used to populate initial data. Running with the dev profile doesn't trigger the initialisation. There is a Gradle task for this: `bootRunDev`. [Reference link](https://www.baeldung.com/spring-boot-data-sql-and-schema-sql)
+
+Run `./gradlew bootRun` to setup or clear the database. Run `./gradle bootRunDev` if you want to keep data.
 
 ## Mobile Testing
 ngrok can be used to create a link if browser simulation is not enough. Make sure the ports match the local ports. Current port is set to 8080.
