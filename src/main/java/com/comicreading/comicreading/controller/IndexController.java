@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.comicreading.comicreading.domain.Comic;
 import com.comicreading.comicreading.service.ComicService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
 public class IndexController {
 
     @Autowired
@@ -20,6 +23,13 @@ public class IndexController {
     public String homePage(Model model) {
         List<Comic> list = comicService.getAllComics();
         model.addAttribute("comics", list);
+
+        log.trace("A TRACE Message");
+        log.debug("A DEBUG Message");
+        log.info("An INFO Message");
+        log.warn("A WARN Message");
+        log.error("An ERROR Message");
+
         return "comic/comicListMain";
     }
 }

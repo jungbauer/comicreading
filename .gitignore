@@ -6,6 +6,7 @@ build/
 !**/src/test/**/build/
 data/demo.trace.db
 data/demo.mv.db
+/logs
 
 ### STS ###
 .apt_generated
