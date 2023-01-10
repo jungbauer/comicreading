@@ -7,6 +7,7 @@ build/
 data/demo.trace.db
 data/demo.mv.db
 /logs
+.DS_Store
 
 ### STS ###
 .apt_generated
