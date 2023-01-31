@@ -33,6 +33,8 @@ ngrok http 8080
 ## Useful hosting commands
 Build Docker image with: `./gradlew bootBuildImage`
 
+Initialise Fly.io app with: `flyctl launch --no-deploy --local-only --image reik/comicreading`
+
 Deploy with: `flyctl deploy --local-only --image reik/comicreading`
 
 Connect to Fly Postgres with: `fly postgres connect -a <postgres-app-name>`
