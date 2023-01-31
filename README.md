@@ -38,3 +38,10 @@ Initialise Fly.io app with: `flyctl launch --no-deploy --local-only --image reik
 Deploy with: `flyctl deploy --local-only --image reik/comicreading`
 
 Connect to Fly Postgres with: `fly postgres connect -a <postgres-app-name>`
+
+Fly.io generates a database url the JDBC doesn't like. Reformat the url and set the secrets so the correct url can be formed from environment variables.
+```
+flyctl secrets set DB_USERNAME=<put stuff here>
+flyctl secrets set DB_PASSWORD=<put stuff here>
+flyctl secrets set JDBC_DATASOURCE_URL=<put stuff here>
+```
