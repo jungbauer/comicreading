@@ -1,7 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head> 
     <title>List of comics</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -20,30 +18,21 @@
     </style>
 </head>
 <body>
-    <div layout:fragment="content">
-        <section class="my-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1>Comics</h1>
-                        <table class="tg"
-                            <thead>
-                                <tr>
-                                    <th>comic</th>
-                                    <th>increment</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each="comic: ${comics}">
-                                    <td><a target="_blank" th:href="${comic.getActiveLink()}" th:text="${comic.title} + ' (' + ${comic.currChapter} + ')'"></a></td>
-                                    <td class="inc-btn"><a class="btn btn-secondary" th:href="@{/incComic(id=${comic.id})}">+1</a></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
+    <h1>Comics</h1>
+    <table class="tg">
+        <thead>
+        <tr>
+            <th>comic</th>
+            <th>increment</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="comic: ${comics}">
+                <td><a target="_blank" th:href="${comic.getActiveLink()}"
+                        th:text="${comic.title} + ' (' + ${comic.currChapter} + ')'"></a></td>
+                <td class="inc-btn"><a class="btn btn-secondary" th:href="@{/incComic(id=${comic.id})}">+1</a></td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>

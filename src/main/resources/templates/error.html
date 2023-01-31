@@ -1,24 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Error</title>
 </head>
 <body>
-    <div layout:fragment="content">
-        <section class="my-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1>Something went wrong! </h1>
-                        <h2>It's broken...</h2>
-                        <div th:text="${statusCode}"></div>
-                        <a href="/">Go Home</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
+    <h1>Something went wrong! </h1>
+    <h2>It's broken...</h2>
+    <div th:text="${statusCode}"></div>
+    <a href="/">Go Home</a>
 </body>
 </html>
