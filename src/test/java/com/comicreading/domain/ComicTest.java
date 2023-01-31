@@ -1,4 +1,4 @@
-package com.comicreading.comicreading.domain;
+package com.comicreading.domain;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

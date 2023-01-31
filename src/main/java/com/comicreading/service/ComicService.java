@@ -1,4 +1,4 @@
-package com.comicreading.comicreading.service;
+package com.comicreading.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.comicreading.comicreading.domain.Comic;
-import com.comicreading.comicreading.repository.ComicRepository;
+import com.comicreading.domain.Comic;
+import com.comicreading.repository.ComicRepository;
 
 @Service
 public class ComicService {
