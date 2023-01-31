@@ -1,4 +1,4 @@
-package com.comicreading.comicreading.controller;
+package com.comicreading.controller;
 
 import java.util.List;
 
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.comicreading.comicreading.domain.Comic;
-import com.comicreading.comicreading.service.ComicService;
+import com.comicreading.domain.Comic;
+import com.comicreading.service.ComicService;
 
 @Controller
 public class ComicController {

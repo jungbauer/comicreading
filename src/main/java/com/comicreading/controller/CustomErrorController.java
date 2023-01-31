@@ -1,4 +1,4 @@
-package com.comicreading.comicreading.controller;
+package com.comicreading.controller;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
 // import org.springframework.http.HttpStatus;

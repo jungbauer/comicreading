@@ -1,4 +1,4 @@
-package com.comicreading.comicreading.domain;
+package com.comicreading.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

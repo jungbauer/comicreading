@@ -1,4 +1,4 @@
-package com.comicreading.comicreading.controller;
+package com.comicreading.controller;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.comicreading.comicreading.domain.Comic;
-import com.comicreading.comicreading.service.ComicService;
+import com.comicreading.domain.Comic;
+import com.comicreading.service.ComicService;
 
 import lombok.extern.slf4j.Slf4j;
 

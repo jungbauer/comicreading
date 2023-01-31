@@ -33,15 +33,15 @@
     </appender>
     
     <!-- LOG everything at INFO level -->
-    <root level="info">
-        <appender-ref ref="RollingFile" />
+    <root level="INFO">
         <appender-ref ref="Console" />
     </root>
 
-    <!-- LOG "com.springtest*" at TRACE level -->
-    <logger name="com.springtest" level="trace" additivity="false">
-        <appender-ref ref="RollingFile" />
-        <appender-ref ref="Console" />
-    </logger>
+    <springProfile name="dev">
+        <logger name="com.comicreading" level="TRACE" additivity="false">
+            <appender-ref ref="RollingFile" />
+            <appender-ref ref="Console" />
+        </logger>>
+    </springProfile>
 
 </configuration>

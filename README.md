@@ -1,6 +1,11 @@
 # Comic Reading
 This is a project to track the manhwa comics I read.
 
+* Spring Boot framework
+* Thymeleaf templating
+* Postgresql database
+* Docker image hosing on [Fly.io](https://fly.io/)
+
 # Development
 
 ## Postgres user and db
@@ -19,8 +24,24 @@ The database, using the default profile, is initialised via JPA/Hibernate and `i
 
 Run `./gradlew bootRun` to setup or clear the database. Run `./gradle bootRunDev` if you want to keep data.
 
-## Mobile Testing
+## Local Mobile Testing
 ngrok can be used to create a link if browser simulation is not enough. Make sure the ports match the local ports. Current port is set to 8080.
 ```
 ngrok http 8080
+```
+
+## Useful hosting commands
+Build Docker image with: `./gradlew bootBuildImage`
+
+Initialise Fly.io app with: `flyctl launch --no-deploy --local-only --image reik/comicreading`
+
+Deploy with: `flyctl deploy --local-only --image reik/comicreading`
+
+Connect to Fly Postgres with: `fly postgres connect -a <postgres-app-name>`
+
+Fly.io generates a database url the JDBC doesn't like. Reformat the url and set the secrets so the correct url can be formed from environment variables.
+```
+flyctl secrets set DB_USERNAME=<put stuff here>
+flyctl secrets set DB_PASSWORD=<put stuff here>
+flyctl secrets set JDBC_DATASOURCE_URL=<put stuff here>
 ```

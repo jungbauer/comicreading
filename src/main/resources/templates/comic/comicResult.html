@@ -1,29 +1,38 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head> 
     <title>New Comic added</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <div layout:fragment="content">
-        <div class="container">
-            <div class="row">
-                <h1>Comic Result</h1>
-                <table>
-                    <tbody>
-                        <tr><td>ID</td><td th:text="${comic.id}"></td></tr>
-                        <tr><td>Title</td><td th:text="${comic.title}"></td></tr>
-                        <tr><td>Main Link</td><td th:text="${comic.mainLink}"></td></tr>
-                        <tr><td>Current Chapter</td><td th:text="${comic.currChapter}"></td></tr>
-                        <tr><td>link prefix</td><td th:text="${comic.activeLinkPrefix}"></td></tr>
-                        <tr><td>link suffix</td><td th:text="${comic.activeLinkSuffix}"></td></tr>
-                    </tbody>
-                </table>
-                <div><a href="/addComic">Submit another comic</a></div>
-            </div>
-        </div>
-    </div>
+    <h1>Comic Result</h1><table>
+        <tbody>
+            <tr>
+                <td>ID</td>
+                <td th:text="${comic.id}"></td>
+            </tr>
+            <tr>
+                <td>Title</td>
+                <td th:text="${comic.title}"></td>
+            </tr>
+            <tr>
+                <td>Main Link</td>
+                <td th:text="${comic.mainLink}"></td>
+            </tr>
+            <tr>
+                <td>Current Chapter</td>
+                <td th:text="${comic.currChapter}"></td>
+            </tr>
+            <tr>
+                <td>link prefix</td>
+                <td th:text="${comic.activeLinkPrefix}"></td>
+            </tr>
+            <tr>
+                <td>link suffix</td>
+                <td th:text="${comic.activeLinkSuffix}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <div><a href="/addComic">Submit another comic</a></div>
 </body>
 </html>
