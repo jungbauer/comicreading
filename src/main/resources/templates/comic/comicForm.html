@@ -1,20 +1,36 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head> 
-    <title>Add a Comic</title> 
+
+<head>
+    <title>Add a Comic</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:replace="~{fragments :: bootstrap}">
 </head>
+
 <body>
-    <h1>Add Comic</h1>
-    <form action="#" th:action="@{/saveComic}" th:object="${comic}" method="post">
-        <p><input type="hidden" th:field="*{id}" /></p>
-        <p>Title: <input type="text" th:field="*{title}" /></p>
-        <p>main link: <input type="text" th:field="*{mainLink}" /></p>
-        <p>current chapter: <input type="text" th:field="*{currChapter}" /></p>
-        <p>link prefix: <input type="text" th:field="*{activeLinkPrefix}" /></p>
-        <p>link suffix: <input type="text" th:field="*{activeLinkSuffix}" /></p>
-        <p><input type="submit" value="Submit"> <input type="reset" value="Reset"></p>
-    </form>
+    <nav th:replace="~{fragments :: nav}"></nav>
+
+    <section class="my-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Add Comic</h1>
+                    <form action="#" th:action="@{/saveComic}" th:object="${comic}" method="post">
+                        <p><input type="hidden" th:field="*{id}" /></p>
+                        <p>Title: <input type="text" th:field="*{title}" /></p>
+                        <p>main link: <input type="text" th:field="*{mainLink}" /></p>
+                        <p>current chapter: <input type="text" th:field="*{currChapter}" /></p>
+                        <p>link prefix: <input type="text" th:field="*{activeLinkPrefix}" /></p>
+                        <p>link suffix: <input type="text" th:field="*{activeLinkSuffix}" /></p>
+                        <p><input type="submit" value="Submit"> <input type="reset" value="Reset"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer th:replace="~{fragments :: footer}"></footer>
 
 </body>
+
 </html>
