@@ -1,40 +1,86 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head> 
-    <title>List of comics</title> 
+
+<head>
+    <title>List of comics</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link th:replace="~{fragments :: bootstrap}"></div>
+    <link th:replace="~{fragments :: bootstrap}">
 
     <style type="text/css">
-        .tg  {border-collapse:collapse;border-color:#9ABAD9;border-spacing:0;}
-        .tg td{border-color:#9ABAD9;border-style:solid;border-width:1px;color:#444;
-          font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
-        .tg th{background-color:#409cff;border-color:#9ABAD9;border-style:solid;border-width:1px;color:#fff;
-          font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-        .tg tr:nth-child(even) {background-color:#D2E4FC;}
+        .tg {
+            border-collapse: collapse;
+            border-color: #9ABAD9;
+            border-spacing: 0;
+        }
+
+        .tg td {
+            border-color: #9ABAD9;
+            border-style: solid;
+            border-width: 1px;
+            color: #444;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg th {
+            background-color: #409cff;
+            border-color: #9ABAD9;
+            border-style: solid;
+            border-width: 1px;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: normal;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg tr:nth-child(even) {
+            background-color: #D2E4FC;
+        }
 
         .inc-btn {
             text-align: center;
         }
     </style>
 </head>
+
 <body>
-    <h1>Comics</h1>
-    <table class="tg">
-        <thead>
-        <tr>
-            <th>comic</th>
-            <th>increment</th>
-        </tr>
-        </thead>
-        <tbody>
-            <tr th:each="comic: ${comics}">
-                <td><a target="_blank" th:href="${comic.getActiveLink()}"
-                        th:text="${comic.title} + ' (' + ${comic.currChapter} + ')'"></a></td>
-                <td class="inc-btn"><a class="btn btn-secondary" th:href="@{/incComic(id=${comic.id})}">+1</a></td>
-            </tr>
-        </tbody>
-    </table>
-    <div th:insert="~{fragments :: footer}"></div>
+    <!-- Main Navigation -->
+    <nav th:replace="~{fragments :: nav}"></nav>
+
+    <!-- Content Section -->
+    <section class="my-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Comics</h1>
+                    <table class="tg">
+                        <thead>
+                            <tr>
+                                <th>comic</th>
+                                <th>increment</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="comic: ${comics}">
+                                <td><a target="_blank" th:href="${comic.getActiveLink()}"
+                                        th:text="${comic.title} + ' (' + ${comic.currChapter} + ')'"></a></td>
+                                <td class="inc-btn"><a class="btn btn-secondary" th:href="@{/incComic(id=${comic.id})}">+1</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer th:replace="~{fragments :: footer}"></footer>
 </body>
+
 </html>
