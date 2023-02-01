@@ -1,5 +1,5 @@
 # Comic Reading
-This is a project to track the manhwa comics I read.
+This is a project to track the manhwa comics I read. [Current website link](https://dark-shadow-5732.fly.dev/)
 
 * Spring Boot framework
 * Thymeleaf templating
