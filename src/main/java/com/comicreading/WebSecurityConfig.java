@@ -28,23 +28,19 @@ public class WebSecurityConfig {
             .build();
     }
     
-    // @Bean
-    // public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    //     http.csrf().disable()
-    //     .authorizeHttpRequests()
-    //             .requestMatchers("/", "/home","/login*", "/logout*","/user/registration*","/successRegister*").permitAll()
-    //             .requestMatchers("/userOnly").hasRole("USER")
-    //             .requestMatchers("/adminOnly").hasRole("ADMIN")
-    //             .anyRequest().authenticated()
-    //             .and().formLogin().defaultSuccessUrl("/home")
-    //             .and().logout()
-    //             .and().httpBasic();
-    //     return http.build();
-    // }
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable();
+        // TODO this csrf disable feel icky...
+        // TODO there must be a better way to import these request patterns
+        http.csrf().disable()
+        .authorizeHttpRequests()
+                .requestMatchers("/","/login*", "/logout*","/user/registration*","/successRegister*","/error*").permitAll()
+                .requestMatchers("/comics","/addComic","/saveComic","/editComic","/incComic","/deleteComic").hasRole("USER")
+                // .requestMatchers("/adminOnly").hasRole("ADMIN")
+                .anyRequest().authenticated()
+                .and().formLogin().defaultSuccessUrl("/")
+                .and().logout()
+                .and().httpBasic();
         return http.build();
     }
 
