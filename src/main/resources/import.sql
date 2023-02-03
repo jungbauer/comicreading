@@ -1,3 +1,4 @@
+-- insert comics into the comics table
 INSERT INTO comics (title, main_link, curr_chapter, active_link_prefix, active_link_suffix) VALUES ('The Beginning After the End', 'https://toonily.net/manga/the-beginning-after-the-end/', '170', 'https://toonily.net/manga/the-beginning-after-the-end/chapter-','/');
 INSERT INTO comics (title, main_link, curr_chapter, active_link_prefix, active_link_suffix) VALUES ('Mercenary Enrollment', 'https://toonily.net/manga/mercenary-enrollment/', '113', 'https://toonily.net/manga/mercenary-enrollment/chapter-', '/');
 INSERT INTO comics (title, main_link, curr_chapter, active_link_prefix, active_link_suffix) VALUES ('Reaper of the Drifting Moon', 'https://toonily.net/manga/reaper-of-the-drifting-moon/', '43', 'https://toonily.net/manga/reaper-of-the-drifting-moon/chapter-', '/');
@@ -10,3 +11,8 @@ INSERT INTO comics (title, main_link, curr_chapter, active_link_prefix, active_l
 INSERT INTO comics (title, main_link, curr_chapter, active_link_prefix, active_link_suffix) VALUES ('Damn Reincarnation', 'https://toonily.net/manga/damn-reincarnation/', '45', 'https://toonily.net/manga/damn-reincarnation/chapter-', '/');
 INSERT INTO comics (title, main_link, curr_chapter, active_link_prefix, active_link_suffix) VALUES ('I am the Fated Villain', 'https://asura.gg/manga/i-am-the-fated-villain/', '11', 'https://asura.gg/i-am-the-fated-villain-chapter-', '/');
 INSERT INTO comics (title, main_link, curr_chapter, active_link_prefix, active_link_suffix) VALUES ('Dungeon Odyssey', 'https://asura.gg/manga/dungeon-odyssey/', '30', 'https://asura.gg/dungeon-odyssey-chapter-', '/');
+
+
+-- insert roles for the role table
+INSERT INTO role (name) VALUES ('ROLE_USER');
+INSERT INTO role (name) VALUES ('ROLE_ADMIN');
