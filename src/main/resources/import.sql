@@ -14,5 +14,5 @@ INSERT INTO comics (title, main_link, curr_chapter, active_link_prefix, active_l
 
 
 -- insert roles for the role table
-INSERT INTO role (name) VALUES ('ROLE_USER');
 INSERT INTO role (name) VALUES ('ROLE_ADMIN');
+INSERT INTO role (name) VALUES ('ROLE_USER');
