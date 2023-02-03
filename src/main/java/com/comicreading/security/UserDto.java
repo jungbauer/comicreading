@@ -1,11 +1,12 @@
 package com.comicreading.security;
 
+import com.comicreading.validation.PasswordMatches;
 import com.comicreading.validation.ValidEmail;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-// @PasswordMatches // todo implement password matching validation
+@PasswordMatches
 public class UserDto {
     
     @NotNull(message = "First name cannot be null.")
