@@ -3,6 +3,7 @@ package com.comicreading.service;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,11 +50,18 @@ public class UserService implements IUserService {
         return userRepository.save(user);
     }
 
-    // private boolean emailExists(String email) {
-    // return userRepository.findByEmail(email).size() > 0;
-    // }
-
     private boolean emailExists(String email) {
         return userRepository.findByEmail(email) != null;
+    }
+
+    public User getUserFromEmail(String email) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(email);
+
+        if (user == null) {
+            log.error("No user found for email: " + email);
+            throw new UsernameNotFoundException("No user found for email: " + email);
+        }
+
+        return user;
     }
 }
