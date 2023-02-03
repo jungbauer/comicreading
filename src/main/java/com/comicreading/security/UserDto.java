@@ -1,5 +1,7 @@
 package com.comicreading.security;
 
+import com.comicreading.validation.ValidEmail;
+
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
@@ -19,7 +21,7 @@ public class UserDto {
     private String password;
     private String matchingPassword;
     
-    // @ValidEmail //todo implement custom email validation
+    @ValidEmail
     @NotNull(message = "Email cannot be null.")
     @NotEmpty(message = "Email cannot be empty.")
     private String email;
