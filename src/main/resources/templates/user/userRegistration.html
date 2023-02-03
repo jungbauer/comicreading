@@ -5,6 +5,12 @@
     <title>User Registration</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link th:replace="~{fragments :: bootstrap}">
+
+    <style type="text/css">
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
@@ -19,22 +25,22 @@
                         <div>
                             <label>first name</label>
                             <input type="text" th:field="*{firstName}" required="required" />
-                            <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Validation error</p>
+                            <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error" >Validation error</p>
                         </div>
                         <div>
                             <label>last name</label>
                             <input type="text" th:field="*{lastName}" required="required" />
-                            <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Validation error</p>
+                            <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error" >Validation error</p>
                         </div>
                         <div>
                             <label>email</label>
                             <input type="email" th:field="*{email}" required="required" />
-                            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Validation error</p>
+                            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error" >Validation error</p>
                         </div>
                         <div>
                             <label>password</label>
                             <input type="password" th:field="*{password}" required="required" />
-                            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Validation error</p>
+                            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error" >Validation error</p>
                         </div>
                         <div>
                             <label>confirm password</label>
@@ -44,7 +50,7 @@
                     
                         <div th:if="${#fields.hasAnyErrors()}">
                             <ul>
-                                <li th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+                                <li th:each="err : ${#fields.allErrors()}" th:text="${err}" class="error" />
                             </ul>
                         </div>
                     </form>
