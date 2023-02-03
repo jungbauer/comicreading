@@ -27,6 +27,9 @@ public class UserDto {
     @NotEmpty(message = "Email cannot be empty.")
     private String email;
 
+    public UserDto() {
+    }
+
     public String getFirstName() {
         return firstName;
     }
