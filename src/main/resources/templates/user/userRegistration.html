@@ -18,27 +18,27 @@
                     <form action="#" th:action="@{/user/registration}" th:object="${userDto}" method="POST" enctype="utf8">
                         <div>
                             <label>first name</label>
-                            <input type="text" th:field="*{firstName}" />
+                            <input type="text" th:field="*{firstName}" required="required" />
                             <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Validation error</p>
                         </div>
                         <div>
                             <label>last name</label>
-                            <input type="text" th:field="*{lastName}" />
+                            <input type="text" th:field="*{lastName}" required="required" />
                             <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Validation error</p>
                         </div>
                         <div>
                             <label>email</label>
-                            <input type="email" th:field="*{email}" />
+                            <input type="email" th:field="*{email}" required="required" />
                             <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Validation error</p>
                         </div>
                         <div>
                             <label>password</label>
-                            <input type="password" th:field="*{password}" />
+                            <input type="password" th:field="*{password}" required="required" />
                             <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Validation error</p>
                         </div>
                         <div>
                             <label>confirm password</label>
-                            <input type="password" th:field="*{matchingPassword}" />
+                            <input type="password" th:field="*{matchingPassword}" required="required" />
                         </div>
                         <button type="submit">submit</button>
                     
