@@ -60,7 +60,7 @@ public class ComicController {
             model.addAttribute("comic", editComic);
             return "comic/comicForm";
         } catch (Exception e) {
-            // TODO: handle exception
+            log.error("Error when editing comic.", e);
             return "error";
         }
         
@@ -77,7 +77,7 @@ public class ComicController {
                 return new ModelAndView("redirect:comics");
             else return new ModelAndView("redirect:/");
         } catch (Exception e) {
-            // TODO: handle exception
+            log.error("Error when incrementing comic.", e);
             return new ModelAndView("error");
         }
         
@@ -90,7 +90,7 @@ public class ComicController {
             comicService.deleteComic(Integer.parseInt(comicId));
             return new ModelAndView("redirect:comics");
         } catch (Exception e) {
-            // TODO: handle exception
+            log.error("Error when deleting comic.", e);
             return new ModelAndView("error");
         }
         
