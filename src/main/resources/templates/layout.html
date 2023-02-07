@@ -33,8 +33,11 @@
                     <li class="nav-item"><a class="nav-link" th:href="@{/addComic}">Add</a></li>
                 </ul>
             </div>
-            <div>Person@person.com<button type="button" class="btn btn-success">Login</button></div>
-            <button type="button" class="btn btn-warning">Logout</button>
+            <div sec:authorize="isAuthenticated()">
+                <span sec:authentication="name">Auth Name</span>
+                <a class="btn btn-warning" th:href="@{/logout}">Logout</a>
+            </div>
+            <div th:unless="${#authorization.expression('isAuthenticated()')}"><a class="btn btn-success" th:href="@{/logout}">Login</a></div>
         </div>
     </nav>
 
