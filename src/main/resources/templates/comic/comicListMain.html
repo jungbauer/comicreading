@@ -1,11 +1,10 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
 
 <head>
-    <title>List of comics</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link th:replace="~{fragments :: bootstrap}">
+    <title>Main List</title>
 
     <style type="text/css">
         .tg {
@@ -51,38 +50,35 @@
 </head>
 
 <body>
-    <!-- Main Navigation -->
-    <nav th:replace="~{fragments :: nav}"></nav>
-    <div th:replace="~{fragments :: authentication}"></div>
 
-    <!-- Content Section -->
-    <section class="my-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1>Comics</h1>
-                    <table class="tg">
-                        <thead>
-                            <tr>
-                                <th>comic</th>
-                                <th>increment</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="comic: ${comics}">
-                                <td><a target="_blank" th:href="${comic.getActiveLink()}"
-                                        th:text="${comic.title} + ' (' + ${comic.currChapter} + ')'"></a></td>
-                                <td class="inc-btn"><a class="btn btn-secondary" th:href="@{/incComic(id=${comic.id})}">+1</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
+    <div layout:fragment="content">
+        <section class="my-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Comics</h1>
+                        <table class="tg">
+                            <thead>
+                                <tr>
+                                    <th>comic</th>
+                                    <th>increment</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="comic: ${comics}">
+                                    <td><a target="_blank" th:href="${comic.getActiveLink()}"
+                                            th:text="${comic.title} + ' (' + ${comic.currChapter} + ')'"></a></td>
+                                    <td class="inc-btn"><a class="btn btn-secondary"
+                                            th:href="@{/incComic(id=${comic.id})}">+1</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
-    <!-- Footer -->
-    <footer th:replace="~{fragments :: footer}"></footer>
 </body>
 
 </html>

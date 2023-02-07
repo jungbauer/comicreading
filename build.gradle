@@ -23,6 +23,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
@@ -41,6 +42,10 @@ tasks.named('test') {
 tasks.named("bootBuildImage") {
 	imageName = "reik/comicreading"
 	environment["BP_JVM_VERSION"] = "17"
+	environment["BPE_DELIM_JAVA_TOOL_OPTIONS"] = " "
+	environment["BPE_APPEND_JAVA_TOOL_OPTIONS"] = "-XX:MaxRAM=400m"
+	environment["BPE_APPEND_JAVA_TOOL_OPTIONS"] = "-XX:+UseSerialGC"
+	environment["BPE_APPEND_JAVA_TOOL_OPTIONS"] = "-Xss512k"
 }
 
 tasks.register("bootRunDev") {

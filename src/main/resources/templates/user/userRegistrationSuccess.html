@@ -1,28 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
 
 <head>
     <title>Successful User Registration</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link th:replace="~{fragments :: bootstrap}">
 </head>
 
 <body>
-    <nav th:replace="~{fragments :: nav}"></nav>
-
-    <section class="my-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1>A new user has been successfully registered.</h1>
-                    <h2 th:text="${regUsername}">Username</h2>            
-                    <h2 th:text="${regEmail}">Email</h2>  
+    <div layout:fragment="content">
+        <section class="my-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>A new user has been successfully registered.</h1>
+                        <h2 th:text="${regUsername}">Username</h2>
+                        <h2 th:text="${regEmail}">Email</h2>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
-    <footer th:replace="~{fragments :: footer}"></footer>
 </body>
 
 </html>

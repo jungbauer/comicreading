@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Welcome to Comic Reading</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link th:replace="~{fragments :: bootstrap}">
-</head>
-<body>
-    <nav th:replace="~{fragments :: nav}"></nav>
-    <div th:replace="~{fragments :: authentication}"></div>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
 
-    <section class="my-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1>Welcome to my comic reading site</h1>
-                    <a th:href="@{/}">home page</a>
-                    <a th:href="@{/user/registration}">/user/registration</a>
+<head>
+    <title>Welcome</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <section class="my-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Welcome to Our Site</h1>
+                        <a th:href="@{/}">home page 1</a>
+                        <a th:href="@{/user/registration}">/user/registration 1</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <footer th:replace="~{fragments :: footer}"></footer>
+        </section>
+    </div>
 </body>
+
 </html>

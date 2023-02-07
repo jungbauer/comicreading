@@ -1,29 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
 
 <head>
     <title>Error</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link th:replace="~{fragments :: bootstrap}">
 </head>
 
 <body>
-    <nav th:replace="~{fragments :: nav}"></nav>
-
-    <section class="my-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1>Something went wrong! </h1>
-                    <h2>It's broken...</h2>
-                    <div th:text="${statusCode}"></div>
-                    <a href="/">Go Home</a>
+    <div layout:fragment="content">
+        <section class="my-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Something went wrong! </h1>
+                        <h2>It's broken...</h2>
+                        <div th:text="${statusCode}"></div>
+                        <a href="/">Go Home</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
-    <footer th:replace="~{fragments :: footer}"></footer>
 </body>
 
 </html>

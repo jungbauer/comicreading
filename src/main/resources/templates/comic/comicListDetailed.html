@@ -1,10 +1,10 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
 
 <head>
-    <title>Detailed List of comics</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link th:replace="~{fragments :: bootstrap}">
+    <title>Detailed List</title>
 
     <style type="text/css">
         .tg {
@@ -46,54 +46,51 @@
 </head>
 
 <body>
-    <nav th:replace="~{fragments :: nav}"></nav>
-    <div th:replace="~{fragments :: authentication}"></div>
-
-    <!-- Content Section -->
-    <section class="my-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1>Comics</h1>
-                    <table class="tg">
-                        <thead>
-                            <tr>
-                                <th>id</th>
-                                <th>title</th>
-                                <th>mainlink</th>
-                                <th>currChap</th>
-                                <th>linkPrefix</th>
-                                <th>linkSuffix</th>
-                                <th>active link</th>
-                                <th>user</th>
-                                <th>edit</th>
-                                <th>increment</th>
-                                <th>DELETE</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="comic: ${comics}">
-                                <td th:text="${comic.id}"></td>
-                                <td th:text="${comic.title}" />
-                                <td th:text="${comic.mainLink}" />
-                                <td th:text="${comic.currChapter}"></td>
-                                <td th:text="${comic.activeLinkPrefix}"></td>
-                                <td th:text="${comic.activeLinkSuffix}"></td>
-                                <td><a target="_blank" th:href="${comic.getActiveLink()}"
-                                        th:text="${comic.getActiveLink()}"></a></td>
-                                <td th:text="${comic.user.id}"></td>
-                                <td><a th:href="@{/editComic(id=${comic.id})}">edit</a></td>
-                                <td><a th:href="@{/incComic(id=${comic.id})}">increment</a></td>
-                                <td><a th:href="@{/deleteComic(id=${comic.id})}">DELETE</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
+    <div layout:fragment="content">
+        <section class="my-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Comics</h1>
+                        <table class="tg">
+                            <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>title</th>
+                                    <th>mainlink</th>
+                                    <th>currChap</th>
+                                    <th>linkPrefix</th>
+                                    <th>linkSuffix</th>
+                                    <th>active link</th>
+                                    <th>user</th>
+                                    <th>edit</th>
+                                    <th>increment</th>
+                                    <th>DELETE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="comic: ${comics}">
+                                    <td th:text="${comic.id}"></td>
+                                    <td th:text="${comic.title}" />
+                                    <td th:text="${comic.mainLink}" />
+                                    <td th:text="${comic.currChapter}"></td>
+                                    <td th:text="${comic.activeLinkPrefix}"></td>
+                                    <td th:text="${comic.activeLinkSuffix}"></td>
+                                    <td><a target="_blank" th:href="${comic.getActiveLink()}"
+                                            th:text="${comic.getActiveLink()}"></a></td>
+                                    <td th:text="${comic.user.id}"></td>
+                                    <td><a th:href="@{/editComic(id=${comic.id})}">edit</a></td>
+                                    <td><a th:href="@{/incComic(id=${comic.id})}">increment</a></td>
+                                    <td><a th:href="@{/deleteComic(id=${comic.id})}">DELETE</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
-    <footer th:replace="~{fragments :: footer}"></footer>
 </body>
 
 </html>
