@@ -38,6 +38,13 @@ public class ComicController {
         return "comic/comicListDetailed";
     }
 
+    @GetMapping("/summary")
+    public String comicListSummary(Model model) {
+        List<Comic> list = comicService.getAllComics();
+        model.addAttribute("comics", list);
+        return "comic/comicListSummary";
+    }
+
     @GetMapping("/addComic")
     public String comicForm(Model model) {
         model.addAttribute("comic", new Comic());
