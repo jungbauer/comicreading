@@ -1,5 +1,6 @@
 package com.comicreading.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +15,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.comicreading.domain.Comic;
+import com.comicreading.domain.User;
 import com.comicreading.service.ComicService;
+import com.comicreading.service.UserService;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
+@Slf4j
 public class ComicController {
     
     @Autowired
     private ComicService comicService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/comics")
     public String comicListDetailed(Model model) {
@@ -36,7 +45,9 @@ public class ComicController {
     }
 
     @PostMapping("/saveComic")
-    public String saveComic(@ModelAttribute Comic comic, Model model) {
+    public String saveComic(@ModelAttribute Comic comic, Model model, Principal principal) {
+        User user = userService.getUserFromEmail(principal.getName());
+        comic.setUser(user);
         Comic savedComic = comicService.saveComic(comic);
         model.addAttribute("comic", savedComic);
         return "comic/comicResult";

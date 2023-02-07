@@ -23,13 +23,8 @@ public class IndexController {
     public String homePage(Model model) {
         List<Comic> list = comicService.getAllComics();
         model.addAttribute("comics", list);
+        log.debug("homepage hit");
 
-        log.trace("A TRACE Message");
-        log.debug("A DEBUG Message");
-        log.info("An INFO Message");
-        log.warn("A WARN Message");
-        log.error("An ERROR Message");
-
-        return "comic/comicListMain";
+        return "index";
     }
 }

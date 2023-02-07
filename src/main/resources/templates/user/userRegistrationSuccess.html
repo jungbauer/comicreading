@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Welcome to Comic Reading</title>
+    <title>Successful User Registration</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link th:replace="~{fragments :: bootstrap}">
 </head>
+
 <body>
     <nav th:replace="~{fragments :: nav}"></nav>
-    <div th:replace="~{fragments :: authentication}"></div>
 
     <section class="my-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>Welcome to my comic reading site</h1>
-                    <a th:href="@{/}">home page</a>
-                    <a th:href="@{/user/registration}">/user/registration</a>
+                    <h1>A new user has been successfully registered.</h1>
+                    <h2 th:text="${regUsername}">Username</h2>            
+                    <h2 th:text="${regEmail}">Email</h2>  
                 </div>
             </div>
         </div>
@@ -23,4 +24,5 @@
 
     <footer th:replace="~{fragments :: footer}"></footer>
 </body>
+
 </html>
