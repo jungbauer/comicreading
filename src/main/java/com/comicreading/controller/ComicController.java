@@ -32,16 +32,16 @@ public class ComicController {
     private UserService userService;
 
     @GetMapping("/comics")
-    public String comicListDetailed(Model model) {
-        List<Comic> list = comicService.getAllComics();
-        model.addAttribute("comics", list);
+    public String comicListDetailed(Model model, Principal principal) {
+        User user = userService.getUserFromEmail(principal.getName());
+        model.addAttribute("comics", user.getComics());
         return "comic/comicListDetailed";
     }
 
     @GetMapping("/summary")
-    public String comicListSummary(Model model) {
-        List<Comic> list = comicService.getAllComics();
-        model.addAttribute("comics", list);
+    public String comicListSummary(Model model, Principal principal) {
+        User user = userService.getUserFromEmail(principal.getName());
+        model.addAttribute("comics", user.getComics());
         return "comic/comicListSummary";
     }
 
