@@ -61,9 +61,10 @@ public class ComicController {
     }
 
     @GetMapping("/editComic")
-    public String editComic(@RequestParam(name = "id") String comicId, Model model) {
+    public String editComic(@RequestParam(name = "id") String comicId, Model model, Principal principal) {
         try {
-            Comic editComic = comicService.findComicById(Integer.parseInt(comicId));
+            User user = userService.getUserFromEmail(principal.getName());
+            Comic editComic = comicService.findComicByIdAndUserId(Integer.parseInt(comicId), user.getId());
             model.addAttribute("comic", editComic);
             return "comic/comicForm";
         } catch (Exception e) {
