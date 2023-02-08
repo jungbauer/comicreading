@@ -81,8 +81,8 @@ public class ComicController {
             editComic.incrementChapter();
             comicService.saveComic(editComic);
             if(referer.substring(referer.length()-6, referer.length()).equals("comics"))
-                return new ModelAndView("redirect:comics");
-            else return new ModelAndView("redirect:/");
+                return new ModelAndView("redirect:/comics");
+            else return new ModelAndView("redirect:/summary");
         } catch (Exception e) {
             log.error("Error when incrementing comic.", e);
             return new ModelAndView("error");
