@@ -35,11 +35,11 @@ public class WebSecurityConfig {
         http.csrf().disable()
         .authorizeHttpRequests()
                 .requestMatchers("/","/login*", "/logout*","/user/registration*","/successRegister*","/error*").permitAll()
-                .requestMatchers("/comics","/addComic","/saveComic","/editComic","/incComic","/deleteComic").hasRole("USER")
+                .requestMatchers("/comics","/addComic","/saveComic","/editComic","/incComic","/deleteComic","/summary").hasRole("USER")
                 // .requestMatchers("/adminOnly").hasRole("ADMIN")
                 .anyRequest().authenticated()
-                .and().formLogin().defaultSuccessUrl("/")
-                .and().logout()
+                .and().formLogin().defaultSuccessUrl("/summary")
+                .and().logout().logoutSuccessUrl("/")
                 .and().httpBasic();
         return http.build();
     }
