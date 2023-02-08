@@ -37,15 +37,17 @@ public class ComicService {
         else throw new Exception("Comic not found");
     }
 
-    public void deleteComic(Integer id) throws Exception{
+    public void deleteComic(Integer id, Long userId) throws Exception{
         if(id == null) throw new Exception("Id should not be null");
-        Optional<Comic> optComic = comicRepository.findById(id);
+        if(userId == null) throw new Exception("User id should not be null");
+        Optional<Comic> optComic = comicRepository.findByIdAndUserId(id, userId);
         if(optComic.isPresent()) comicRepository.delete(optComic.get());
         else throw new Exception("Comic not found");
     }
 
     public Comic findComicByIdAndUserId(Integer id, Long userId) throws Exception{
         if(id == null) throw new Exception("Id should not be null");
+        if(userId == null) throw new Exception("User id should not be null");
         Optional<Comic> optComic = comicRepository.findByIdAndUserId(id, userId);
         if(optComic.isPresent()) return optComic.get();
         else throw new Exception("Comic not found");

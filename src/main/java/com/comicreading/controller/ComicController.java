@@ -76,9 +76,10 @@ public class ComicController {
 
     @GetMapping("/incComic")
     public ModelAndView incComic(@RequestParam(name = "id") String comicId, Model model, 
-    @RequestHeader(value = HttpHeaders.REFERER, required = false) String referer) {
+    @RequestHeader(value = HttpHeaders.REFERER, required = false) String referer, Principal principal) {
         try {
-            Comic editComic = comicService.findComicById(Integer.parseInt(comicId));
+            User user = userService.getUserFromEmail(principal.getName());
+            Comic editComic = comicService.findComicByIdAndUserId(Integer.parseInt(comicId), user.getId());
             editComic.incrementChapter();
             comicService.saveComic(editComic);
             if(referer.substring(referer.length()-6, referer.length()).equals("comics"))
@@ -92,10 +93,11 @@ public class ComicController {
     }
 
     @GetMapping("/deleteComic")
-    public ModelAndView deleteComic(@RequestParam(name = "id") String comicId, Model model) {
+    public ModelAndView deleteComic(@RequestParam(name = "id") String comicId, Model model, Principal principal) {
         //TODO this really needs a confirmation modal etc
         try {
-            comicService.deleteComic(Integer.parseInt(comicId));
+            User user = userService.getUserFromEmail(principal.getName());
+            comicService.deleteComic(Integer.parseInt(comicId), user.getId());
             return new ModelAndView("redirect:comics");
         } catch (Exception e) {
             log.error("Error when deleting comic.", e);
