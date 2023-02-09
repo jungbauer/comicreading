@@ -1,5 +1,10 @@
 package com.comicreading.domain;
 
+import java.time.ZonedDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +30,12 @@ public class Comic {
 
     @Column(columnDefinition="TEXT")
     private String notes;
+
+    @CreationTimestamp
+    private ZonedDateTime created;
+
+    @UpdateTimestamp
+    private ZonedDateTime updated;
 
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
@@ -110,6 +121,22 @@ public class Comic {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public ZonedDateTime getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(ZonedDateTime updated) {
+        this.updated = updated;
+    }
+
+    public ZonedDateTime getCreated() {
+        return created;
+    }
+
+    public void setCreated(ZonedDateTime created) {
+        this.created = created;
     }
 
     @Override
