@@ -41,6 +41,9 @@ public class Comic {
     @JoinColumn(name="user_id", nullable=false)
     private User user;
 
+    @Column(columnDefinition = "varchar(255) default 'O'")
+    private ComicCategory category;
+
     public Comic() {}
     
     public Comic(String title, String mainLink, String currChapter) {
@@ -143,6 +146,14 @@ public class Comic {
     @Override
     public String toString() {
         return "Comic [id=" + id + ", title=" + title + ", currChapter=" + currChapter + "]";
+    }
+
+    public ComicCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(ComicCategory category) {
+        this.category = category;
     }
 
 }
