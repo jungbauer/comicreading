@@ -104,4 +104,19 @@ public class ComicController {
         }
         
     }
+
+    @GetMapping("/viewComic")
+    public String viewComic(@RequestParam(name = "id") String comicId, Model model, Principal principal) {
+        try {
+            // TODO make helper for this repeated user-comic pattern.
+            User user = userService.getUserFromEmail(principal.getName());
+            Comic viewComic = comicService.findComicByIdAndUserId(Integer.parseInt(comicId), user.getId());
+            model.addAttribute("comic", viewComic);
+            return "comic/comicSingle";
+        } catch (Exception e) {
+            log.error("Error when viewing comic.", e);
+            return "error";
+        }
+        
+    }
 }

@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
+
+<head>
+    <title>Comic</title>
+
+    <style type="text/css">
+        .tg {
+            border-collapse: collapse;
+            border-color: #9ABAD9;
+            border-spacing: 0;
+        }
+
+        .tg td {
+            border-color: #9ABAD9;
+            border-style: solid;
+            border-width: 1px;
+            color: #444;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg th {
+            background-color: #409cff;
+            border-color: #9ABAD9;
+            border-style: solid;
+            border-width: 1px;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: normal;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div layout:fragment="content">
+        <section class="my-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Comic</h1>
+                        <table class="tg">
+                            <tbody>
+                                <tr>
+                                    <td>Title</td>
+                                    <td th:text="${comic.title}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Main Link</td>
+                                    <td>
+                                        <a target="_blank" th:href="${comic.mainLink}" th:text="${comic.mainLink}"></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Active Link</td>
+                                    <td>
+                                        <a target="_blank" th:href="${comic.getActiveLink()}" th:text="${comic.getActiveLink()}"></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Current Chapter</td>
+                                    <td th:text="${comic.currChapter}"></td>
+                                </tr>
+                                <tr>
+                                    <td>link prefix</td>
+                                    <td th:text="${comic.activeLinkPrefix}"></td>
+                                </tr>
+                                <tr>
+                                    <td>link suffix</td>
+                                    <td th:text="${comic.activeLinkSuffix}"></td>
+                                </tr>
+                                <tr>
+                                    <td>notes</td>
+                                    <td th:text="${comic.notes}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Created</td>
+                                    <td th:text="${comic.created}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Updated</td>
+                                    <td th:text="${comic.updated}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr>
+                        <h3>Actions</h2>
+                        <div>
+                            <a class="btn btn-warning" th:href="@{/editComic(id=${comic.id})}">edit</a>
+                            <a class="btn btn-success" th:href="@{/incComic(id=${comic.id})}">increment</a>
+                            <a class="btn btn-danger" th:href="@{/deleteComic(id=${comic.id})}">DELETE</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</body>
+
+</html>
