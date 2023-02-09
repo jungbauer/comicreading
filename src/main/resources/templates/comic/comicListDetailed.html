@@ -55,38 +55,25 @@
                         <table class="tg">
                             <thead>
                                 <tr>
-                                    <th>id</th>
-                                    <th>title</th>
-                                    <th>mainlink</th>
-                                    <th>currChap</th>
-                                    <th>linkPrefix</th>
-                                    <th>linkSuffix</th>
-                                    <th>active link</th>
-                                    <th>notes</th>
-                                    <th>created</th>
-                                    <th>updated</th>
-                                    <th>edit</th>
-                                    <th>increment</th>
-                                    <th>DELETE</th>
+                                    <th></th>
+                                    <th>Title</th>
+                                    <th>Current</th>
+                                    <th>Notes</th>
+                                    <th>Edit</th>
+                                    <th>Increment</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr th:each="comic: ${comics}">
-                                    <td th:text="${comic.id}"></td>
-                                    <td th:text="${comic.title}" />
-                                    <td th:text="${comic.mainLink}" />
-                                    <td th:text="${comic.currChapter}"></td>
-                                    <td th:text="${comic.activeLinkPrefix}"></td>
-                                    <td th:text="${comic.activeLinkSuffix}"></td>
+                                    <td><a class="btn btn-secondary" th:href="@{/viewComic(id=${comic.id})}">view</a></td>
                                     <td>
-                                        <a target="_blank" th:href="${comic.getActiveLink()}" th:text="${comic.getActiveLink()}"></a>
+                                        <a target="_blank" th:href="${comic.mainLink}" th:text="${comic.title}"></a>
                                     </td>
+                                    <td>
+                                        <a target="_blank" th:href="${comic.getActiveLink()}" th:text="'Chapter ' + ${comic.currChapter}"></a></td>
                                     <td th:text="${comic.notes}"></td>
-                                    <td th:text="${comic.created}"></td>
-                                    <td th:text="${comic.updated}"></td>
-                                    <td><a class="btn btn-secondary" th:href="@{/editComic(id=${comic.id})}">edit</a></td>
+                                    <td><a class="btn btn-warning" th:href="@{/editComic(id=${comic.id})}">edit</a></td>
                                     <td><a class="btn btn-success" th:href="@{/incComic(id=${comic.id})}">increment</a></td>
-                                    <td><a class="btn btn-danger" th:href="@{/deleteComic(id=${comic.id})}">DELETE</a></td>
                                 </tr>
                             </tbody>
                         </table>
