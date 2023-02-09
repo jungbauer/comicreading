@@ -74,16 +74,19 @@ public class ComicController {
     }
 
     @GetMapping("/incComic")
-    public ModelAndView incComic(@RequestParam(name = "id") String comicId, Model model, 
-    @RequestHeader(value = HttpHeaders.REFERER, required = false) String referer, Principal principal) {
+    public ModelAndView incComic(@RequestParam(name = "id") String comicId, @RequestParam(name = "sr", defaultValue = "test") String source, 
+        Model model, Principal principal) {
         try {
             User user = userService.getUserFromEmail(principal.getName());
             Comic editComic = comicService.findComicByIdAndUserId(Integer.parseInt(comicId), user.getId());
             editComic.incrementChapter();
             comicService.saveComic(editComic);
-            if(referer.substring(referer.length()-6, referer.length()).equals("comics"))
-                return new ModelAndView("redirect:/comics");
-            else return new ModelAndView("redirect:/summary");
+            switch (source) {
+                case "su":  return new ModelAndView("redirect:/summary");
+                case "si":  return new ModelAndView("redirect:/viewComic?id=" + comicId);
+            
+                default:    return new ModelAndView("redirect:/comics");
+            }
         } catch (Exception e) {
             log.error("Error when incrementing comic.", e);
             return new ModelAndView("error");
