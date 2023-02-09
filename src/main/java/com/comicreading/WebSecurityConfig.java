@@ -34,8 +34,9 @@ public class WebSecurityConfig {
         // TODO there must be a better way to import these request patterns
         http.csrf().disable()
         .authorizeHttpRequests()
-                .requestMatchers("/","/login*", "/logout*","/user/registration*","/successRegister*","/error*").permitAll()
+                .requestMatchers("/","/login*", "/logout*", "/error*").permitAll()
                 .requestMatchers("/comics","/addComic","/saveComic","/editComic","/incComic","/deleteComic","/summary", "/viewComic").hasRole("USER")
+                .requestMatchers("/user/registration*","/successRegister*").hasRole("ADMIN")
                 // .requestMatchers("/adminOnly").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and().formLogin().defaultSuccessUrl("/summary")
