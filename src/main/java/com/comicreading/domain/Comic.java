@@ -1,5 +1,6 @@
 package com.comicreading.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,14 +13,18 @@ import jakarta.persistence.Table;
 @Table(name = "comics")
 public class Comic {
     @Id
+    @Column(unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     private String title;
     private String mainLink;
     private String currChapter;
     private String activeLinkPrefix;
     private String activeLinkSuffix;
+
+    @Column(columnDefinition="TEXT")
+    private String notes;
 
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
@@ -33,11 +38,11 @@ public class Comic {
         this.currChapter = currChapter;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int newId) {
+    public void setId(Long newId) {
         this.id = newId;
     }
 
@@ -97,6 +102,14 @@ public class Comic {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     @Override

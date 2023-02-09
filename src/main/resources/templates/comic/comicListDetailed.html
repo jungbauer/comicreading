@@ -62,6 +62,7 @@
                                     <th>linkPrefix</th>
                                     <th>linkSuffix</th>
                                     <th>active link</th>
+                                    <th>notes</th>
                                     <th>edit</th>
                                     <th>increment</th>
                                     <th>DELETE</th>
@@ -78,6 +79,7 @@
                                     <td>
                                         <a target="_blank" th:href="${comic.getActiveLink()}" th:text="${comic.getActiveLink()}"></a>
                                     </td>
+                                    <td th:text="${comic.notes}"></td>
                                     <td><a th:href="@{/editComic(id=${comic.id})}">edit</a></td>
                                     <td><a th:href="@{/incComic(id=${comic.id})}">increment</a></td>
                                     <td><a th:href="@{/deleteComic(id=${comic.id})}">DELETE</a></td>
