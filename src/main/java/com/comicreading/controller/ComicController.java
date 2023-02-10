@@ -1,6 +1,8 @@
 package com.comicreading.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -40,7 +42,32 @@ public class ComicController {
     @GetMapping("/summary")
     public String comicListSummary(Model model, Principal principal) {
         User user = userService.getUserFromEmail(principal.getName());
+
+        List<Comic> reading = new ArrayList<>();
+        List<Comic> waiting = new ArrayList<>();
+        List<Comic> dormant = new ArrayList<>();
+        List<Comic> lostInterest = new ArrayList<>();
+        List<Comic> other = new ArrayList<>();
+        List<Comic> complete = new ArrayList<>();
+
+        for (Comic comic : user.getComics()) {
+            switch (comic.getCategory()) {
+                case READING -> reading.add(comic);
+                case WAITING -> waiting.add(comic);
+                case DORMANT -> dormant.add(comic);
+                case COMPLETE -> complete.add(comic);
+                case LOST_INTEREST -> lostInterest.add(comic);
+                default -> other.add(comic);
+            }
+        }
+
         model.addAttribute("comics", user.getComics());
+        model.addAttribute("reading", reading);
+        model.addAttribute("waiting", waiting);
+        model.addAttribute("dormant", dormant);
+        model.addAttribute("lostInterest", lostInterest);
+        model.addAttribute("other", other);
+        model.addAttribute("complete", complete);
         return "comic/comicListSummary";
     }
 
@@ -91,12 +118,11 @@ public class ComicController {
             Comic editComic = comicService.findComicByIdAndUserId(Integer.parseInt(comicId), user.getId());
             editComic.incrementChapter();
             comicService.saveComic(editComic);
-            switch (source) {
-                case "su":  return new ModelAndView("redirect:/summary");
-                case "si":  return new ModelAndView("redirect:/viewComic?id=" + comicId);
-            
-                default:    return new ModelAndView("redirect:/comics");
-            }
+            return switch (source) {
+                case "su" -> new ModelAndView("redirect:/summary");
+                case "si" -> new ModelAndView("redirect:/viewComic?id=" + comicId);
+                default -> new ModelAndView("redirect:/comics");
+            };
         } catch (Exception e) {
             log.error("Error when incrementing comic.", e);
             return new ModelAndView("error");

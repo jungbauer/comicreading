@@ -5,12 +5,6 @@
 
 <head>
     <title>Main List</title>
-    <link rel="stylesheet" th:href="@{/css/generalTable.css}"/>
-    <style type="text/css">
-        .inc-btn {
-            text-align: center;
-        }
-    </style>
 </head>
 
 <body>
@@ -21,22 +15,145 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h1>Comics</h1>
-                        <table class="tg tg-striped">
-                            <thead>
-                                <tr>
-                                    <th>comic</th>
-                                    <th>increment</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each="comic: ${comics}">
-                                    <td><a target="_blank" th:href="${comic.getActiveLink()}"
-                                            th:text="${comic.title} + ' (' + ${comic.currChapter} + ')'"></a></td>
-                                    <td class="inc-btn"><a class="btn btn-secondary"
-                                            th:href="@{/incComic(id=${comic.id},sr=su)}">+1</a></td>
-                                </tr>
-                            </tbody>
-                        </table>
+
+                        <div class="container my-5">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr class="table-primary">
+                                            <th>Reading</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="rc: ${reading}">
+                                            <td><a target="_blank" th:href="${rc.getActiveLink()}"
+                                                   th:text="${rc.title} + ' (' + ${rc.currChapter} + ')'"></a></td>
+                                            <td class="inc-btn"><a class="btn btn-secondary"
+                                                                   th:href="@{/incComic(id=${rc.id},sr=su)}">+1</a></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container my-5">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr class="table-warning">
+                                            <th>Waiting</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="rc: ${waiting}">
+                                            <td><a target="_blank" th:href="${rc.getActiveLink()}"
+                                                   th:text="${rc.title} + ' (' + ${rc.currChapter} + ')'"></a></td>
+                                            <td class="inc-btn"><a class="btn btn-secondary"
+                                                                   th:href="@{/incComic(id=${rc.id},sr=su)}">+1</a></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container my-5">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <table class="table  table-striped">
+                                        <thead>
+                                        <tr class="table-success">
+                                            <th>Other</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="rc: ${other}">
+                                            <td><a target="_blank" th:href="${rc.getActiveLink()}"
+                                                   th:text="${rc.title} + ' (' + ${rc.currChapter} + ')'"></a></td>
+                                            <td class="inc-btn"><a class="btn btn-secondary"
+                                                                   th:href="@{/incComic(id=${rc.id},sr=su)}">+1</a></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container my-5">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr class="table-info">
+                                            <th>Dormant</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="rc: ${dormant}">
+                                            <td><a target="_blank" th:href="${rc.getActiveLink()}"
+                                                   th:text="${rc.title} + ' (' + ${rc.currChapter} + ')'"></a></td>
+                                            <td class="inc-btn"><a class="btn btn-secondary"
+                                                                   th:href="@{/incComic(id=${rc.id},sr=su)}">+1</a></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container my-5">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr class="table-danger">
+                                            <th>Complete</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="rc: ${complete}">
+                                            <td><a target="_blank" th:href="${rc.getActiveLink()}"
+                                                   th:text="${rc.title} + ' (' + ${rc.currChapter} + ')'"></a></td>
+                                            <td class="inc-btn"><a class="btn btn-secondary"
+                                                                   th:href="@{/incComic(id=${rc.id},sr=su)}">+1</a></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container my-5">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr class="table-dark">
+                                            <th>Lost Interest</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="rc: ${lostInterest}">
+                                            <td><a target="_blank" th:href="${rc.getActiveLink()}"
+                                                   th:text="${rc.title} + ' (' + ${rc.currChapter} + ')'"></a></td>
+                                            <td class="inc-btn"><a class="btn btn-secondary"
+                                                                   th:href="@{/incComic(id=${rc.id},sr=su)}">+1</a></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
