@@ -58,9 +58,9 @@
                                     <th></th>
                                     <th>Title</th>
                                     <th>Current</th>
+                                    <th>Category</th>
                                     <th>Notes</th>
                                     <th>Edit</th>
-                                    <th>Increment</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -70,10 +70,11 @@
                                         <a target="_blank" th:href="${comic.mainLink}" th:text="${comic.title}"></a>
                                     </td>
                                     <td>
-                                        <a target="_blank" th:href="${comic.getActiveLink()}" th:text="'Chapter ' + ${comic.currChapter}"></a></td>
+                                        <a target="_blank" th:href="${comic.getActiveLink()}" th:text="'Chapter ' + ${comic.currChapter}"></a>
+                                    </td>
+                                    <td th:text="${comic.category}"></td>
                                     <td th:text="${comic.notes}"></td>
                                     <td><a class="btn btn-warning" th:href="@{/editComic(id=${comic.id})}">edit</a></td>
-                                    <td><a class="btn btn-success" th:href="@{/incComic(id=${comic.id})}">increment</a></td>
                                 </tr>
                             </tbody>
                         </table>
