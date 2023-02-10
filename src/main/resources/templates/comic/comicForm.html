@@ -21,6 +21,12 @@
                             <p>link prefix: <input type="text" th:field="*{activeLinkPrefix}" /></p>
                             <p>link suffix: <input type="text" th:field="*{activeLinkSuffix}" /></p>
                             <p>Notes: <input type="text" th:field="*{notes}" /></p>
+                            <p>
+                                Category:
+                                <select th:field="*{category}">
+                                    <option th:each="option : ${options}" th:value="${option}" th:text="${option}"></option>
+                                </select>
+                            </p>
                             <p><input type="submit" value="Submit"> <input type="reset" value="Reset"></p>
                         </form>
                     </div>

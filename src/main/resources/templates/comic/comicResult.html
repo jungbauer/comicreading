@@ -4,6 +4,7 @@
 
 <head>
     <title>New Comic added</title>
+    <link rel="stylesheet" th:href="@{/css/generalTable.css}"/>
 </head>
 
 <body>
@@ -14,7 +15,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h1>Comic Result</h1>
-                        <table>
+                        <table class="tg">
                             <tbody>
                                 <tr>
                                     <td>ID</td>
@@ -41,12 +42,15 @@
                                     <td th:text="${comic.activeLinkSuffix}"></td>
                                 </tr>
                                 <tr>
-                                    <td>link suffix</td>
+                                    <td>Notes</td>
                                     <td th:text="${comic.notes}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Category</td>
+                                    <td th:text="${comic.category}"></td>
                                 </tr>
                             </tbody>
                         </table>
-                        <div><a href="/addComic">Submit another comic</a></div>
                     </div>
                 </div>
             </div>

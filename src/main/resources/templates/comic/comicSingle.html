@@ -4,40 +4,7 @@
 
 <head>
     <title>Comic</title>
-
-    <style type="text/css">
-        .tg {
-            border-collapse: collapse;
-            border-color: #9ABAD9;
-            border-spacing: 0;
-        }
-
-        .tg td {
-            border-color: #9ABAD9;
-            border-style: solid;
-            border-width: 1px;
-            color: #444;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            overflow: hidden;
-            padding: 10px 5px;
-            word-break: normal;
-        }
-
-        .tg th {
-            background-color: #409cff;
-            border-color: #9ABAD9;
-            border-style: solid;
-            border-width: 1px;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            font-weight: normal;
-            overflow: hidden;
-            padding: 10px 5px;
-            word-break: normal;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/generalTable.css}"/>
 </head>
 
 <body>
@@ -89,6 +56,10 @@
                                 <tr>
                                     <td>Updated</td>
                                     <td th:text="${comic.updated}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Category</td>
+                                    <td th:text="${comic.category}"></td>
                                 </tr>
                             </tbody>
                         </table>
