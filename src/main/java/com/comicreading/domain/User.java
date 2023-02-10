@@ -1,7 +1,7 @@
 package com.comicreading.domain;
 
 import java.util.Collection;
-import java.util.Set;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,7 +37,7 @@ public class User {
     private Collection<Role> roles;
 
     @OneToMany(mappedBy="user")
-    private Set<Comic> comics;
+    private List<Comic> comics;
 
     public User() {
     }
@@ -90,11 +90,12 @@ public class User {
         this.roles = roles;
     }
 
-    public Set<Comic> getComics() {
+    public List<Comic> getComics() {
+        comics.sort((Comic c1, Comic c2) -> c1.getId().compareTo(c2.getId()));
         return comics;
     }
 
-    public void setComics(Set<Comic> comics) {
+    public void setComics(List<Comic> comics) {
         this.comics = comics;
     }
 
