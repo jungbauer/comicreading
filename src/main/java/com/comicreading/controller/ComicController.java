@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.comicreading.domain.Comic;
+import com.comicreading.domain.ComicCategory;
 import com.comicreading.domain.User;
 import com.comicreading.service.ComicService;
 import com.comicreading.service.UserService;
@@ -53,6 +54,7 @@ public class ComicController {
             }
         }
 
+        model.addAttribute("options", ComicCategory.values());
         model.addAttribute("comic", new Comic());
         return "comic/comicForm";
     }
@@ -71,6 +73,7 @@ public class ComicController {
         try {
             User user = userService.getUserFromEmail(principal.getName());
             Comic editComic = comicService.findComicByIdAndUserId(Integer.parseInt(comicId), user.getId());
+            model.addAttribute("options", ComicCategory.values());
             model.addAttribute("comic", editComic);
             return "comic/comicForm";
         } catch (Exception e) {
