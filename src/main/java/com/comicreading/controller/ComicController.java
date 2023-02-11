@@ -1,8 +1,6 @@
 package com.comicreading.controller;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.comicreading.util.display.SummaryDO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,31 +42,17 @@ public class ComicController {
     public String comicListSummary(Model model, Principal principal) {
         User user = userService.getUserFromEmail(principal.getName());
 
-        List<Comic> reading = new ArrayList<>();
-        List<Comic> waiting = new ArrayList<>();
-        List<Comic> dormant = new ArrayList<>();
-        List<Comic> lostInterest = new ArrayList<>();
-        List<Comic> other = new ArrayList<>();
-        List<Comic> complete = new ArrayList<>();
-
+        SummaryDO summaryDO = new SummaryDO();
         for (Comic comic : user.getComics()) {
             switch (comic.getCategory()) {
-                case READING -> reading.add(comic);
-                case WAITING -> waiting.add(comic);
-                case DORMANT -> dormant.add(comic);
-                case COMPLETE -> complete.add(comic);
-                case LOST_INTEREST -> lostInterest.add(comic);
-                default -> other.add(comic);
+                case READING -> summaryDO.addToReading(comic);
+                case WAITING -> summaryDO.addToWaiting(comic);
+                case DORMANT -> summaryDO.addToDormant(comic);
+                case COMPLETE -> summaryDO.addToComplete(comic);
+                case LOST_INTEREST -> summaryDO.addToLostInterest(comic);
+                default -> summaryDO.addToOther(comic);
             }
         }
-
-        SummaryDO summaryDO = new SummaryDO();
-        summaryDO.setReading(reading);
-        summaryDO.setWaiting(waiting);
-        summaryDO.setOther(other);
-        summaryDO.setDormant(dormant);
-        summaryDO.setComplete(complete);
-        summaryDO.setLostInterest(lostInterest);
 
         model.addAttribute("summary", summaryDO);
         return "comic/comicListSummary";

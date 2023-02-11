@@ -4,17 +4,22 @@ import com.comicreading.domain.Comic;
 
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
 
 public class SummaryDO {
 
     private Map<String, List<Comic>> map = new LinkedHashMap<>();
 
     public SummaryDO() {
-
+        map.put("READING", new ArrayList<>());
+        map.put("WAITING", new ArrayList<>());
+        map.put("OTHER", new ArrayList<>());
+        map.put("DORMANT", new ArrayList<>());
+        map.put("COMPLETE", new ArrayList<>());
+        map.put("LOST INTEREST", new ArrayList<>());
     }
 
     public void setReading(List<Comic> reading) {
@@ -43,6 +48,30 @@ public class SummaryDO {
 
     public Map<String, List<Comic>> getMap() {
         return map;
+    }
+
+    public void addToReading(Comic reading) {
+        map.get("READING").add(reading);
+    }
+
+    public void addToWaiting(Comic waiting) {
+        map.get("WAITING").add(waiting);
+    }
+
+    public void addToOther(Comic other) {
+        map.get("OTHER").add(other);
+    }
+
+    public void addToDormant(Comic dormant) {
+        map.get("DORMANT").add(dormant);
+    }
+
+    public void addToComplete(Comic complete) {
+        map.get("COMPLETE").add(complete);
+    }
+
+    public void addToLostInterest(Comic lostInterest) {
+        map.get("LOST INTEREST").add(lostInterest);
     }
 
     public String getCategoryColourClass(String mapKey) {
