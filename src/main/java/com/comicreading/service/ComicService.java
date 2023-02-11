@@ -52,11 +52,5 @@ public class ComicService {
         if(optComic.isPresent()) return optComic.get();
         else throw new Exception("Comic not found");
     }
-
-    public void addInitialTestComics() {
-        comicRepository.save(new Comic("The Beginning After the End", "https://toonily.net/manga/the-beginning-after-the-end/", "171"));
-		comicRepository.save(new Comic("Mercenary Enrollment", "https://toonily.net/manga/mercenary-enrollment/", "113"));
-		comicRepository.save(new Comic("The Beginning After the End", "https://toonily.net/manga/reaper-of-the-drifting-moon/", "41"));
-    }
     
 }
