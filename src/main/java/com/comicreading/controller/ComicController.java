@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.comicreading.util.display.SummaryDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -61,13 +62,15 @@ public class ComicController {
             }
         }
 
-        model.addAttribute("comics", user.getComics());
-        model.addAttribute("reading", reading);
-        model.addAttribute("waiting", waiting);
-        model.addAttribute("dormant", dormant);
-        model.addAttribute("lostInterest", lostInterest);
-        model.addAttribute("other", other);
-        model.addAttribute("complete", complete);
+        SummaryDO summaryDO = new SummaryDO();
+        summaryDO.setReading(reading);
+        summaryDO.setWaiting(waiting);
+        summaryDO.setOther(other);
+        summaryDO.setDormant(dormant);
+        summaryDO.setComplete(complete);
+        summaryDO.setLostInterest(lostInterest);
+
+        model.addAttribute("summary", summaryDO);
         return "comic/comicListSummary";
     }
 
