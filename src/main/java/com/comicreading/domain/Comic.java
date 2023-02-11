@@ -1,6 +1,7 @@
 package com.comicreading.domain;
 
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -156,4 +157,13 @@ public class Comic {
         this.category = category;
     }
 
+    public String wasUpdatedAgo() {
+        if (updated == null) return "many moons ago";
+
+        long diffHrs = ChronoUnit.HOURS.between(updated, ZonedDateTime.now());
+        long diffDays = ChronoUnit.DAYS.between(updated, ZonedDateTime.now());
+
+        if (diffHrs < 24) return Long.toString(diffHrs).concat(" hours ago");
+        else return Long.toString(diffDays).concat(" days ago");
+    }
 }

@@ -23,6 +23,7 @@
                                     <th>Current</th>
                                     <th>Category</th>
                                     <th>Notes</th>
+                                    <th>Updated</th>
                                     <th>Edit</th>
                                 </tr>
                             </thead>
@@ -37,6 +38,7 @@
                                     </td>
                                     <td th:text="${comic.category}"></td>
                                     <td th:text="${comic.notes}"></td>
+                                    <td th:text="${comic.wasUpdatedAgo()}"></td>
                                     <td><a class="btn btn-warning" th:href="@{/editComic(id=${comic.id})}">edit</a></td>
                                 </tr>
                             </tbody>
