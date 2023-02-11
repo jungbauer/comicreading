@@ -23,19 +23,17 @@
                                         <thead>
                                         <tr th:class="${summary.getCategoryColourClass(entry.getKey())}">
                                             <th th:text="${entry.getKey()}"></th>
-                                            <th>text</th>
                                             <th></th>
-                                            <th>colour</th>
+                                            <th></th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr th:each="comic: ${entry.getValue()}">
                                             <td><a target="_blank" th:href="${comic.getActiveLink()}"
                                                    th:text="${comic.title} + ' (' + ${comic.currChapter} + ')'"></a></td>
-                                            <td th:text="${comic.wasUpdatedAgo()}"></td>
                                             <td class="inc-btn"><a class="btn btn-secondary"
                                                                    th:href="@{/incComic(id=${comic.id},sr='su')}">+1</a></td>
-                                            <td th:style="${summary.getUpdatedColour(comic)}"></td>
+                                            <td th:style="'width: 3em;' + ${summary.getUpdatedColour(comic)}"></td>
                                         </tr>
                                         </tbody>
                                     </table>
