@@ -49,18 +49,30 @@ public class Comic {
     @Column(columnDefinition = "integer default 1")
     private Integer totalChapters;
 
+    private ZonedDateTime chaptersUpdated;
+
     @Column(columnDefinition = "varchar(255) default 'O'")
     private ComicCategory category;
 
     public Comic() {
-        this.totalChapters = 1;
+        setTotalChapters(1);
     }
     
     public Comic(String title, String mainLink, String currChapter) {
         this.title = title;
         this.mainLink = mainLink;
+        setCurrChapter(currChapter);
+        setTotalChapters(1);
+    }
+
+    public void setCurrChapter(String currChapter) {
         this.currChapter = currChapter;
-        this.totalChapters = 1;
+        this.chaptersUpdated = ZonedDateTime.now();
+    }
+
+    public void setTotalChapters(Integer totalChapters) {
+        this.totalChapters = totalChapters;
+        this.chaptersUpdated = ZonedDateTime.now();
     }
 
     public String getActiveLink() {
@@ -70,8 +82,8 @@ public class Comic {
     }
 
     public void incrementChapter() {
-        Integer newCh = Integer.parseInt(currChapter) + 1;
-        currChapter = Integer.toString(newCh);
+        int newCh = Integer.parseInt(currChapter) + 1;
+        setCurrChapter(Integer.toString(newCh));
     }
 
     @Override
@@ -80,10 +92,10 @@ public class Comic {
     }
 
     public String wasUpdatedAgo() {
-        if (updated == null) return "many moons ago";
+        if (chaptersUpdated == null) return "many moons ago";
 
-        long diffHrs = ChronoUnit.HOURS.between(updated, ZonedDateTime.now());
-        long diffDays = ChronoUnit.DAYS.between(updated, ZonedDateTime.now());
+        long diffHrs = ChronoUnit.HOURS.between(chaptersUpdated, ZonedDateTime.now());
+        long diffDays = ChronoUnit.DAYS.between(chaptersUpdated, ZonedDateTime.now());
 
         if (diffHrs < 24) return Long.toString(diffHrs).concat(" hours ago");
         else return Long.toString(diffDays).concat(" days ago");
