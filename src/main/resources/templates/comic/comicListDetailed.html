@@ -21,6 +21,7 @@
                                     <th></th>
                                     <th>Title</th>
                                     <th>Current</th>
+                                    <th>Total</th>
                                     <th>Category</th>
                                     <th>Notes</th>
                                     <th>Updated</th>
@@ -36,6 +37,7 @@
                                     <td>
                                         <a target="_blank" th:href="${comic.getActiveLink()}" th:text="'Chapter ' + ${comic.currChapter}"></a>
                                     </td>
+                                    <td th:text="${comic.totalChapters}"></td>
                                     <td th:text="${comic.category}"></td>
                                     <td th:text="${comic.notes}"></td>
                                     <td th:text="${comic.wasUpdatedAgo()}"></td>

@@ -46,15 +46,21 @@ public class Comic {
     @JoinColumn(name="user_id", nullable=false)
     private User user;
 
+    @Column(columnDefinition = "integer default 1")
+    private Integer totalChapters;
+
     @Column(columnDefinition = "varchar(255) default 'O'")
     private ComicCategory category;
 
-    public Comic() {}
+    public Comic() {
+        this.totalChapters = 1;
+    }
     
     public Comic(String title, String mainLink, String currChapter) {
         this.title = title;
         this.mainLink = mainLink;
         this.currChapter = currChapter;
+        this.totalChapters = 1;
     }
 
     public String getActiveLink() {
