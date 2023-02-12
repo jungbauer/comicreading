@@ -29,6 +29,12 @@ public class Comic {
 
     private String title;
     private String mainLink;
+
+    /**
+     * currChapter needs to be a string for active link construction.
+     * Sometimes the format 4-5 is used to denote chapter 4,5. An interim chapter.
+     * Sometimes the format is otherwise odd. String was a flexibility choice.
+     */
     private String currChapter;
     private String activeLinkPrefix;
     private String activeLinkSuffix;
