@@ -3,6 +3,8 @@ package com.comicreading.domain;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -17,6 +19,8 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "comics")
+@Getter
+@Setter
 public class Comic {
     @Id
     @Column(unique = true, nullable = false)
@@ -53,54 +57,6 @@ public class Comic {
         this.currChapter = currChapter;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long newId) {
-        this.id = newId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getMainLink() {
-        return mainLink;
-    }
-
-    public void setMainLink(String mainLink) {
-        this.mainLink = mainLink;
-    }
-
-    public String getCurrChapter() {
-        return currChapter;
-    }
-
-    public void setCurrChapter(String currChapter) {
-        this.currChapter = currChapter;
-    }
-
-    public String getActiveLinkPrefix() {
-        return activeLinkPrefix;
-    }
-
-    public void setActiveLinkPrefix(String activeLinkPrefix) {
-        this.activeLinkPrefix = activeLinkPrefix;
-    }
-
-    public String getActiveLinkSuffix() {
-        return activeLinkSuffix;
-    }
-
-    public void setActiveLinkSuffix(String activeLinkSuffix) {
-        this.activeLinkSuffix = activeLinkSuffix;
-    }
-
     public String getActiveLink() {
         if (activeLinkPrefix == null || currChapter == null) return mainLink;
         if (activeLinkSuffix == null) return activeLinkPrefix.concat(currChapter);
@@ -112,49 +68,9 @@ public class Comic {
         currChapter = Integer.toString(newCh);
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
-    public ZonedDateTime getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(ZonedDateTime updated) {
-        this.updated = updated;
-    }
-
-    public ZonedDateTime getCreated() {
-        return created;
-    }
-
-    public void setCreated(ZonedDateTime created) {
-        this.created = created;
-    }
-
     @Override
     public String toString() {
         return "Comic [id=" + id + ", title=" + title + ", currChapter=" + currChapter + "]";
-    }
-
-    public ComicCategory getCategory() {
-        return category;
-    }
-
-    public void setCategory(ComicCategory category) {
-        this.category = category;
     }
 
     public String wasUpdatedAgo() {

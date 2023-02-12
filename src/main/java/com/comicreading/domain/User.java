@@ -1,6 +1,7 @@
 package com.comicreading.domain;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -14,9 +15,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "user_account")
+@Getter
+@Setter
 public class User {
     @Id
     @Column(unique = true, nullable = false)
@@ -42,61 +47,9 @@ public class User {
     public User() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Collection<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Collection<Role> roles) {
-        this.roles = roles;
-    }
-
     public List<Comic> getComics() {
-        comics.sort((Comic c1, Comic c2) -> c1.getId().compareTo(c2.getId()));
+        comics.sort(Comparator.comparing(Comic::getId));
         return comics;
-    }
-
-    public void setComics(List<Comic> comics) {
-        this.comics = comics;
     }
 
     @Override
