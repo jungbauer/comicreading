@@ -112,6 +112,7 @@ public class ComicController {
             };
         } catch (Exception e) {
             log.error("Error when incrementing comic.", e);
+            model.addAttribute("message", "Please check if the current chapter value can be converted into a number.");
             return new ModelAndView("error");
         }
         
