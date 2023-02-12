@@ -38,12 +38,20 @@
                                     <td th:text="${comic.currChapter}"></td>
                                 </tr>
                                 <tr>
+                                    <td>Total Chapters</td>
+                                    <td th:text="${comic.totalChapters}"></td>
+                                </tr>
+                                <tr>
                                     <td>link prefix</td>
                                     <td th:text="${comic.activeLinkPrefix}"></td>
                                 </tr>
                                 <tr>
                                     <td>link suffix</td>
                                     <td th:text="${comic.activeLinkSuffix}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Category</td>
+                                    <td th:text="${comic.category}"></td>
                                 </tr>
                                 <tr>
                                     <td>notes</td>
@@ -58,8 +66,8 @@
                                     <td th:text="${comic.updated}"></td>
                                 </tr>
                                 <tr>
-                                    <td>Category</td>
-                                    <td th:text="${comic.category}"></td>
+                                    <td>Chapters Updated</td>
+                                    <td th:text="${comic.chaptersUpdated}"></td>
                                 </tr>
                             </tbody>
                         </table>

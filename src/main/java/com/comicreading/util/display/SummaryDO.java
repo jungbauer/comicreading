@@ -1,6 +1,7 @@
 package com.comicreading.util.display;
 
 import com.comicreading.domain.Comic;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
 
+@Slf4j
 public class SummaryDO {
 
     private Map<String, List<Comic>> map = new LinkedHashMap<>();
@@ -86,12 +88,29 @@ public class SummaryDO {
         }
     }
 
-     /*
-        see src/main/resources/static/css/updatedColour.css for colours.
-     * */
     public String getUpdatedColour(Comic comic) {
-        if (comic.getUpdated() == null) return "background-color: magenta;";
-        long diffDays = ChronoUnit.DAYS.between(comic.getUpdated(), ZonedDateTime.now());
+        // see src/main/resources/static/css/updatedColour.css for colours.
+        if (colourBasedOnChapters(comic)) return "background-color: darkgreen;";
+        else return colourBasedOnTimestamp(comic);
+    }
+
+    private boolean colourBasedOnChapters(Comic comic) {
+        try {
+            int currChapter = Integer.parseInt(comic.getCurrChapter());
+            if (comic.getTotalChapters() > currChapter) return true;
+        }
+        catch (NumberFormatException nfe) {
+            log.warn("colourBasedOnChapters() Number conversion error: " + comic.getCurrChapter());
+            return false;
+        }
+
+        return false;
+    }
+
+    private String colourBasedOnTimestamp(Comic comic) {
+        // see src/main/resources/static/css/updatedColour.css for colours.
+        if (comic.getChaptersUpdated() == null) return "background-color: magenta;";
+        long diffDays = ChronoUnit.DAYS.between(comic.getChaptersUpdated(), ZonedDateTime.now());
         if (diffDays <= 1) return "background-color: dimgrey;";
         else if (diffDays < 7) return "background-color: goldenrod;";
         else if (diffDays < 10) return "background-color: darkgreen;";
