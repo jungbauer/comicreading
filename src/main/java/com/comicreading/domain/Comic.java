@@ -83,6 +83,7 @@ public class Comic {
 
     public String getActiveLink() {
         if (activeLinkPrefix == null || currChapter == null) return mainLink;
+        if (activeLinkPrefix.isBlank() || currChapter.isBlank()) return mainLink;
         if (activeLinkSuffix == null) return activeLinkPrefix.concat(currChapter);
         return activeLinkPrefix.concat(currChapter).concat(activeLinkSuffix);
     }
