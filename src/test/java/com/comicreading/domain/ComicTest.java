@@ -1,10 +1,9 @@
 package com.comicreading.domain;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ComicTest {
     static Comic testComic;
@@ -45,8 +44,13 @@ public class ComicTest {
 
     @Test
     void testGetActiveLink() {
-        System.out.println(activeComic.getActiveLink());
-        assertTrue(activeComic.getActiveLink().equals("https://toonily.net/manga/mercenary-enrollment/chapter-106/"));
+        assertEquals("https://toonily.net/manga/mercenary-enrollment/chapter-106/", activeComic.getActiveLink());
+        assertEquals("main link", testComic.getActiveLink());
+
+        Comic emptyStrings = new Comic("Demon Defense Agency", "https://www.voyce.me/series/demon-defense-agency", "1");
+        emptyStrings.setActiveLinkPrefix("");
+        emptyStrings.setActiveLinkSuffix("");
+        assertEquals("https://www.voyce.me/series/demon-defense-agency", emptyStrings.getActiveLink());
     }
 
     @Test
