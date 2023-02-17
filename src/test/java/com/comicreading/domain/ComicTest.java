@@ -89,9 +89,14 @@ public class ComicTest {
     @Test
     void testIncrementChapter() {
         Comic comic = new Comic("active", "active", "37");
+        comic.setTotalChapters(38);
         comic.incrementChapter();
 
-        assertTrue(comic.getCurrChapter().equals("38"));
+        assertEquals("38", comic.getCurrChapter());
+
+        comic.incrementChapter();
+        assertEquals("39", comic.getCurrChapter());
+        assertEquals(39, comic.getTotalChapters());
     }
     
 }

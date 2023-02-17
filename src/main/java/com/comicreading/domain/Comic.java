@@ -91,6 +91,8 @@ public class Comic {
     public void incrementChapter() {
         int newCh = Integer.parseInt(currChapter) + 1;
         setCurrChapter(Integer.toString(newCh));
+
+        if (totalChapters < newCh) setTotalChapters(totalChapters + 1);
     }
 
     @Override
