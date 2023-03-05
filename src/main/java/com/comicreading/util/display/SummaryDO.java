@@ -5,10 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ArrayList;
+import java.util.*;
 
 @Slf4j
 public class SummaryDO {
@@ -90,11 +87,17 @@ public class SummaryDO {
 
     public String getUpdatedColour(Comic comic) {
         // see src/main/resources/static/css/updatedColour.css for colours.
-        if (colourBasedOnChapters(comic)) return "background-color: darkgreen;";
-        else return colourBasedOnTimestamp(comic);
+        ReadingCategory readingCategory = getReadingCategory(comic);
+        switch (readingCategory) {
+            case CHAPTER_BASED, TEN_DAYS -> {return "background-color: darkgreen;";}
+            case ONE_DAY -> {return "background-color: dimgrey;";}
+            case SEVEN_DAYS -> {return "background-color: goldenrod;";}
+            case GREATER_THAN_TEN -> {return "background-color: darkslategrey";}
+            default -> {return "background-color: magenta;";} // covers case WEIRD too
+        }
     }
 
-    private boolean colourBasedOnChapters(Comic comic) {
+    private boolean categoryBasedOnChapters(Comic comic) {
         try {
             int currChapter = Integer.parseInt(comic.getCurrChapter());
             if (comic.getTotalChapters() > currChapter) return true;
@@ -107,13 +110,38 @@ public class SummaryDO {
         return false;
     }
 
-    private String colourBasedOnTimestamp(Comic comic) {
-        // see src/main/resources/static/css/updatedColour.css for colours.
-        if (comic.getChaptersUpdated() == null) return "background-color: magenta;";
+    public void sortReadingList() {
+        List<Comic> chapterBased = new ArrayList<>();
+        List<Comic> timeBased = new ArrayList<>();
+        List<Comic> weird = new ArrayList<>();
+
+        for (Comic comic: map.get("READING")) {
+            ReadingCategory readingCategory = getReadingCategory(comic);
+            switch (readingCategory) {
+                case CHAPTER_BASED -> chapterBased.add(comic);
+                case ONE_DAY, SEVEN_DAYS, TEN_DAYS, GREATER_THAN_TEN -> timeBased.add(comic);
+                default -> weird.add(comic); // covers case WEIRD too
+            }
+        }
+
+        chapterBased.sort(Comparator.comparing(Comic::getChaptersUpdated).reversed());
+        timeBased.sort(Comparator.comparing(Comic::getChaptersUpdated));
+        weird.sort(Comparator.comparing(Comic::getChaptersUpdated));
+
+        List<Comic> newReadingList = new ArrayList<>(chapterBased);
+        newReadingList.addAll(timeBased);
+        newReadingList.addAll(weird);
+
+        map.put("READING", newReadingList);
+    }
+
+    private ReadingCategory getReadingCategory(Comic comic) {
+        if (categoryBasedOnChapters(comic)) return ReadingCategory.CHAPTER_BASED;
+        if (comic.getChaptersUpdated() == null) return ReadingCategory.WEIRD;
         long diffDays = ChronoUnit.DAYS.between(comic.getChaptersUpdated(), ZonedDateTime.now());
-        if (diffDays <= 1) return "background-color: dimgrey;";
-        else if (diffDays < 7) return "background-color: goldenrod;";
-        else if (diffDays < 10) return "background-color: darkgreen;";
-        else return "background-color: darkslategrey";
+        if (diffDays <= 1) return ReadingCategory.ONE_DAY;
+        else if (diffDays < 7) return ReadingCategory.SEVEN_DAYS;
+        else if (diffDays < 10) return ReadingCategory.TEN_DAYS;
+        else return ReadingCategory.GREATER_THAN_TEN;
     }
 }
