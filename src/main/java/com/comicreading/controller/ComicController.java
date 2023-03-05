@@ -54,6 +54,7 @@ public class ComicController {
             }
         }
 
+        summaryDO.sortReadingList();
         model.addAttribute("summary", summaryDO);
         return "comic/comicListSummary";
     }
