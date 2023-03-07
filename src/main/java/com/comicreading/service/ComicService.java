@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.comicreading.domain.ComicCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,6 +52,10 @@ public class ComicService {
         Optional<Comic> optComic = comicRepository.findByIdAndUserId(id, userId);
         if(optComic.isPresent()) return optComic.get();
         else throw new Exception("Comic not found");
+    }
+
+    public List<Comic> findComicsByCategory(ComicCategory category) {
+        return new ArrayList<>(comicRepository.findComicsByCategory(category));
     }
     
 }
