@@ -2,6 +2,7 @@ package com.comicreading.service;
 
 import com.comicreading.domain.Comic;
 import com.comicreading.domain.ComicCategory;
+import com.comicreading.domain.RssEntry;
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -121,5 +123,17 @@ public class ChapterScrapeService {
         } catch (FeedException e) {
             databaseLogsService.logMessage("FeedException: " + e.getMessage());
         }
+    }
+
+    public Map<String, Integer> titleSoup() {
+        databaseLogsService.logMessage("Comparing comics and recorded RSS feed");
+        List<Comic> asuraComics = comicService.getMatchingMainLink("asurascans");
+        Map<String, Integer> comparingMap = new HashMap<String, Integer>();
+        for (Comic comic : asuraComics) {
+            List<RssEntry> rssEntries = rssEntryService.getMatchingEntries(comic.getTitle());
+            comparingMap.put(comic.getTitle(), rssEntries.size());
+        }
+
+        return comparingMap;
     }
 }
