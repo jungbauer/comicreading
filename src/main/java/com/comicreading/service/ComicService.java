@@ -58,4 +58,9 @@ public class ComicService {
         return new ArrayList<>(comicRepository.findComicsByCategory(category));
     }
     
+    public List<Comic> getMatchingMainLink(String queryString) {
+        // select title,main_link from comics where main_link like '%asurascans%'
+        String queryLink = "%" + queryString + "%";
+        return comicRepository.getMatchingMainLink(queryLink);
+    }
 }
