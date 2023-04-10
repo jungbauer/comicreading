@@ -36,7 +36,7 @@ public class WebSecurityConfig {
         .authorizeHttpRequests()
                 .requestMatchers("/","/login*", "/logout*", "/error*", "/js/**", "/css/**").permitAll()
                 .requestMatchers("/comics","/addComic","/saveComic","/editComic","/incComic","/deleteComic","/summary", "/viewComic").hasRole("USER")
-                .requestMatchers("/user/registration*","/successRegister*","/admin/logs").hasRole("ADMIN")
+                .requestMatchers("/user/registration*","/successRegister*","/admin/logs", "/titlesoup").hasRole("ADMIN")
                 // .requestMatchers("/adminOnly").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and().formLogin().defaultSuccessUrl("/summary")
