@@ -1,5 +1,7 @@
 package com.comicreading.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,5 +17,15 @@ public class RssEntryService {
     public void saveRssEntry(String title, String link) {
         RssEntry entry = new RssEntry(title, link);
         rssEntryRepository.save(entry);
+    }
+
+    public List<RssEntry> getEntries() {
+        return rssEntryRepository.findAll();
+    }
+
+    public List<RssEntry> getMatchingEntries(String title) {
+        // select * from rss_entry where title like 'Super Evolution%';
+        String queryTitle = title.concat("%");
+        return rssEntryRepository.getMatchingEntries(queryTitle);
     }
 }
