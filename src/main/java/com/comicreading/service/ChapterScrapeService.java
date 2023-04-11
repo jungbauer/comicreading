@@ -25,6 +25,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 @Slf4j
@@ -125,13 +127,39 @@ public class ChapterScrapeService {
         }
     }
 
-    public Map<String, Integer> titleSoup() {
+    public Map<String, String> titleSoup() {
         databaseLogsService.logMessage("Comparing comics and recorded RSS feed");
         List<Comic> asuraComics = comicService.getMatchingMainLink("asurascans");
-        Map<String, Integer> comparingMap = new HashMap<String, Integer>();
+        Map<String, String> comparingMap = new HashMap<String, String>();
+        Pattern chapterPattern = Pattern.compile("(Chapter \\d{1,})");
+        Pattern numberPattern = Pattern.compile("(\\d{1,})");
         for (Comic comic : asuraComics) {
+            // log.debug("Checking " + comic.getTitle());
             List<RssEntry> rssEntries = rssEntryService.getMatchingEntries(comic.getTitle());
-            comparingMap.put(comic.getTitle(), rssEntries.size());
+            // log.debug("Entries: " + rssEntries.size());
+            Integer feedInt = comic.getTotalChapters();
+
+            for (RssEntry entry : rssEntries) {
+                String culledTitle = entry.getTitle().replaceAll(comic.getTitle(), "");
+                Matcher chapterMatcher = chapterPattern.matcher(culledTitle.trim());
+                boolean found = chapterMatcher.find();
+                if (found) {
+                    String chapterStr = chapterMatcher.group(0);
+                    Matcher numberMatcher = numberPattern.matcher(chapterStr);
+                    if (numberMatcher.find()) {
+                        feedInt = Integer.parseInt(numberMatcher.group());
+                    }
+
+                    // System.out.println((numberMatcher.find() ?  numberMatcher.group(): "not") + " --- " + entry.getTitle() + " --- " + entry.getLink());
+                }
+            }
+
+            // System.out.println("");
+            if (feedInt > comic.getTotalChapters()) {
+                comparingMap.put(comic.getTitle(), "Entries: " + rssEntries.size() + " - should update from " + comic.getTotalChapters() + " to " + feedInt);
+            } else {
+                comparingMap.put(comic.getTitle(), "Entries: " + rssEntries.size() + " - no update: " + comic.getTotalChapters() + " vs " + feedInt);
+            }
         }
 
         return comparingMap;

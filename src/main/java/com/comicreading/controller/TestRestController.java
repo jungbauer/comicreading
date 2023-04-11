@@ -17,7 +17,7 @@ public class TestRestController {
     private ChapterScrapeService chapterScrapeService;
 
     @GetMapping("/titlesoup")
-    public Map<String,Integer> titleSoup() {
+    public Map<String,String> titleSoup() {
         log.info("title soup");
         return chapterScrapeService.titleSoup();
     }
