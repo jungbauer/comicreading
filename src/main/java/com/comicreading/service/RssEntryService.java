@@ -19,6 +19,10 @@ public class RssEntryService {
         rssEntryRepository.save(entry);
     }
 
+    public void saveRssEntries(List<RssEntry> saveList) {
+        rssEntryRepository.saveAll(saveList);
+    }
+
     public List<RssEntry> getEntries() {
         return rssEntryRepository.findAll();
     }

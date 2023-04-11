@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -113,9 +114,27 @@ public class ChapterScrapeService {
             
             databaseLogsService.logMessage("RSS feed size: " + feed.getEntries().size());
 
+            List<RssEntry> entriesToSave = new ArrayList<>();
+            List<Comic> allComics = comicService.getAllComics();
+
             for (SyndEntry entry : feed.getEntries()) {
-                rssEntryService.saveRssEntry(entry.getTitle(), entry.getLink());
+                boolean found = false;
+                int count = 0;
+                while (!found && count < allComics.size()) {
+                    found = entry.getTitle().contains(allComics.get(count).getTitle());
+                    count++;
+                }
+
+                if (found) {
+                    databaseLogsService.logMessage("rss found for: " + entry.getTitle());
+                    entriesToSave.add(new RssEntry(entry.getTitle(), entry.getLink()));
+                } else {
+                    databaseLogsService.logMessage("Not comic found for: " + entry.getTitle());
+                }
             }
+
+            databaseLogsService.logMessage("RSS feed saving " + entriesToSave.size() + " entries.");
+            if (entriesToSave.size() > 0) rssEntryService.saveRssEntries(entriesToSave);
 
         } catch (IOException e) {
             log.error(e.getMessage(), e);
