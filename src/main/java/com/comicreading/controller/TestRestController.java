@@ -22,4 +22,10 @@ public class TestRestController {
         return chapterScrapeService.manualRssEntryUpdate(true);
     }
 
+    @GetMapping("/updateRss")
+    public Map<String,String> manualUpdate() {
+        log.info("Manual RSS comic update");
+        return chapterScrapeService.manualRssEntryUpdate(false);
+    }
+
 }
