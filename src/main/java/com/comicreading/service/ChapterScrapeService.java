@@ -166,7 +166,8 @@ public class ChapterScrapeService {
                     String chapterStr = chapterMatcher.group(0);
                     Matcher numberMatcher = numberPattern.matcher(chapterStr);
                     if (numberMatcher.find()) {
-                        feedInt = Integer.parseInt(numberMatcher.group());
+                        Integer rssInt = Integer.parseInt(numberMatcher.group());
+                        if (rssInt > feedInt) feedInt = rssInt;
                     }
                 }
             }
