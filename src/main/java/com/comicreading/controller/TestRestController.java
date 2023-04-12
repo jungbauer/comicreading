@@ -19,7 +19,7 @@ public class TestRestController {
     @GetMapping("/titlesoup")
     public Map<String,String> titleSoup() {
         log.info("title soup");
-        return chapterScrapeService.manualRssEntryCompare();
+        return chapterScrapeService.manualRssEntryUpdate(true);
     }
 
 }

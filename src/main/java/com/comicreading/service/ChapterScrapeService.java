@@ -146,8 +146,10 @@ public class ChapterScrapeService {
         }
     }
 
-    public Map<String, String> manualRssEntryCompare() {
-        databaseLogsService.logMessage("Comparing comics and recorded RSS feed");
+    public Map<String, String> manualRssEntryUpdate(boolean dryRun) {
+        if (dryRun) databaseLogsService.logMessage("DRYRUN: Comparing comics and recorded RSS feed");
+        else databaseLogsService.logMessage("Manual comic vs rssentry update.");
+        
         List<Comic> asuraComics = comicService.getMatchingMainLink("asurascans");
         Map<String, String> comparingMap = new HashMap<String, String>();
         Pattern chapterPattern = Pattern.compile("(Chapter \\d{1,})");
@@ -170,7 +172,13 @@ public class ChapterScrapeService {
             }
 
             if (feedInt > comic.getTotalChapters()) {
-                comparingMap.put(comic.getTitle(), "Entries: " + rssEntries.size() + " - should update from " + comic.getTotalChapters() + " to " + feedInt);
+                if (dryRun) {
+                    comparingMap.put(comic.getTitle(), "Entries: " + rssEntries.size() + " - should update from " + comic.getTotalChapters() + " to " + feedInt);
+                } else {
+                    comic.setTotalChapters(feedInt);
+                    comicService.saveComic(comic);
+                    comparingMap.put(comic.getTitle(), "Entries: " + rssEntries.size() + " - updated from " + comic.getTotalChapters() + " to " + feedInt);
+                }
             } else {
                 comparingMap.put(comic.getTitle(), "Entries: " + rssEntries.size() + " - no update: " + comic.getTotalChapters() + " vs " + feedInt);
             }
