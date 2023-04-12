@@ -3,6 +3,7 @@ package com.comicreading.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.comicreading.domain.RssEntry;
@@ -33,6 +34,8 @@ public class RssEntryService {
         return rssEntryRepository.getMatchingEntries(queryTitle);
     }
 
+    // Every Monday at 10:15
+    @Scheduled(cron = "0 15 10 ? * MON")
     public void deleteWeekOldEntries() {
         rssEntryRepository.deleteEntriesOlderThatOneWeek();
     }
