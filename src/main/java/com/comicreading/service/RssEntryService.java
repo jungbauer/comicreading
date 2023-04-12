@@ -32,4 +32,8 @@ public class RssEntryService {
         String queryTitle = title.concat("%");
         return rssEntryRepository.getMatchingEntries(queryTitle);
     }
+
+    public void deleteWeekOldEntries() {
+        rssEntryRepository.deleteEntriesOlderThatOneWeek();
+    }
 }
