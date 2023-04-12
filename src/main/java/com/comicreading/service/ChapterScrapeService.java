@@ -175,9 +175,10 @@ public class ChapterScrapeService {
                 if (dryRun) {
                     comparingMap.put(comic.getTitle(), "Entries: " + rssEntries.size() + " - should update from " + comic.getTotalChapters() + " to " + feedInt);
                 } else {
+                    Integer oldTotal = comic.getTotalChapters();
                     comic.setTotalChapters(feedInt);
                     comicService.saveComic(comic);
-                    comparingMap.put(comic.getTitle(), "Entries: " + rssEntries.size() + " - updated from " + comic.getTotalChapters() + " to " + feedInt);
+                    comparingMap.put(comic.getTitle(), "Entries: " + rssEntries.size() + " - updated from " + oldTotal + " to " + feedInt);
                 }
             } else {
                 comparingMap.put(comic.getTitle(), "Entries: " + rssEntries.size() + " - no update: " + comic.getTotalChapters() + " vs " + feedInt);
