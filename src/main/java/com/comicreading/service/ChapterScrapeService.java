@@ -188,4 +188,42 @@ public class ChapterScrapeService {
 
         return comparingMap;
     }
+
+    @Scheduled(cron = "0 0 4 * * ?")
+    public void automaticRssEntryUpdate() {
+        databaseLogsService.logMessage("Cron based comic vs rssentry update started...");
+
+        List<Comic> asuraComics = comicService.getMatchingMainLink("asurascans");
+        Pattern chapterPattern = Pattern.compile("(Chapter \\d{1,})");
+        Pattern numberPattern = Pattern.compile("(\\d{1,})");
+        for (Comic comic : asuraComics) {
+            List<RssEntry> rssEntries = rssEntryService.getMatchingEntries(comic.getTitle());
+            Integer feedInt = comic.getTotalChapters();
+
+            for (RssEntry entry : rssEntries) {
+                String culledTitle = entry.getTitle().replaceAll(comic.getTitle(), "");
+                Matcher chapterMatcher = chapterPattern.matcher(culledTitle.trim());
+                boolean found = chapterMatcher.find();
+                if (found) {
+                    String chapterStr = chapterMatcher.group(0);
+                    Matcher numberMatcher = numberPattern.matcher(chapterStr);
+                    if (numberMatcher.find()) {
+                        Integer rssInt = Integer.parseInt(numberMatcher.group());
+                        if (rssInt > feedInt) feedInt = rssInt;
+                    }
+                }
+            }
+
+            if (feedInt > comic.getTotalChapters()) {
+                Integer oldTotal = comic.getTotalChapters();
+                comic.setTotalChapters(feedInt);
+                comicService.saveComic(comic);
+                databaseLogsService.logMessage("Comic: " + comic.getTitle() + " - Entries: " + rssEntries.size()  + " - updated from " + oldTotal + " to " + feedInt);
+            } else {
+                databaseLogsService.logMessage("Comic: " + comic.getTitle() + " - Entries: " + rssEntries.size() + " - no update: " + comic.getTotalChapters() + " vs " + feedInt);
+            }
+        }
+
+        databaseLogsService.logMessage("Cron based comic vs rssentry update complete...");
+    }
 }
