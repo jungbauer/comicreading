@@ -146,16 +146,14 @@ public class ChapterScrapeService {
         }
     }
 
-    public Map<String, String> titleSoup() {
+    public Map<String, String> manualRssEntryCompare() {
         databaseLogsService.logMessage("Comparing comics and recorded RSS feed");
         List<Comic> asuraComics = comicService.getMatchingMainLink("asurascans");
         Map<String, String> comparingMap = new HashMap<String, String>();
         Pattern chapterPattern = Pattern.compile("(Chapter \\d{1,})");
         Pattern numberPattern = Pattern.compile("(\\d{1,})");
         for (Comic comic : asuraComics) {
-            // log.debug("Checking " + comic.getTitle());
             List<RssEntry> rssEntries = rssEntryService.getMatchingEntries(comic.getTitle());
-            // log.debug("Entries: " + rssEntries.size());
             Integer feedInt = comic.getTotalChapters();
 
             for (RssEntry entry : rssEntries) {
@@ -168,12 +166,9 @@ public class ChapterScrapeService {
                     if (numberMatcher.find()) {
                         feedInt = Integer.parseInt(numberMatcher.group());
                     }
-
-                    // System.out.println((numberMatcher.find() ?  numberMatcher.group(): "not") + " --- " + entry.getTitle() + " --- " + entry.getLink());
                 }
             }
 
-            // System.out.println("");
             if (feedInt > comic.getTotalChapters()) {
                 comparingMap.put(comic.getTitle(), "Entries: " + rssEntries.size() + " - should update from " + comic.getTotalChapters() + " to " + feedInt);
             } else {
