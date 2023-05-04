@@ -22,6 +22,7 @@
                                     <table class="table table-striped">
                                         <thead>
                                         <tr th:class="${summary.getCategoryColourClass(entry.getKey())}">
+                                            <th></th>
                                             <th th:text="${entry.getKey()}"></th>
                                             <th></th>
                                             <th></th>
@@ -29,11 +30,12 @@
                                         </thead>
                                         <tbody>
                                         <tr th:each="comic: ${entry.getValue()}">
+                                            <td th:style="'width: 3em;' + ${summary.getUpdatedColour(comic)}"></td>
                                             <td><a target="_blank" th:href="${comic.getActiveLink()}"
                                                    th:text="${comic.title} + ' (' + ${comic.currChapter} + ' of ' + ${comic.totalChapters} + ')'"></a></td>
                                             <td class="inc-btn"><a class="btn btn-secondary"
                                                                    th:href="@{/incComic(id=${comic.id},sr='su')}">+1</a></td>
-                                            <td th:style="'width: 3em;' + ${summary.getUpdatedColour(comic)}"></td>
+                                            <td><a class="btn btn-success" th:href="@{/viewComic(id=${comic.id})}">view</a></td>
                                         </tr>
                                         </tbody>
                                     </table>
