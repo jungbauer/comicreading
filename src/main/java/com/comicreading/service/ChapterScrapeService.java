@@ -42,7 +42,7 @@ public class ChapterScrapeService {
     @Autowired
     private RssEntryService rssEntryService;
 
-    @Scheduled(cron = "0 0 3 * * ?")
+//    @Scheduled(cron = "0 0 3 * * ?")
     public void scrapeReadingComicChapters() {
         databaseLogsService.logMessage("Starting chapter scrape");
         List<Comic> comicList = comicService.findComicsByCategory(ComicCategory.READING);
@@ -85,7 +85,7 @@ public class ChapterScrapeService {
         return Integer.parseInt(chapterCount);
     }
     
-    @Scheduled(cron = "0 0 * 1/1 * ?")
+//    @Scheduled(cron = "0 0 * 1/1 * ?")
     public void rssFeedCheck() {
         databaseLogsService.logMessage("Checking RSS feed");
         try {
@@ -189,7 +189,7 @@ public class ChapterScrapeService {
         return comparingMap;
     }
 
-    @Scheduled(cron = "0 0 4 * * ?")
+//    @Scheduled(cron = "0 0 4 * * ?")
     public void automaticRssEntryUpdate() {
         databaseLogsService.logMessage("Cron based comic vs rssentry update started...");
 
